@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exame Teológico</title>
     <style>
-        .correta { background-color: green; color: white; }
-        .errada { background-color: red; color: white; }
+        .correta { background-color: green; color: white; padding: 2px; }
+        .errada { background-color: red; color: white; padding: 2px; }
+        .resposta { display: inline-block; width: 40%; }
+        .resposta-correta { color: green; font-weight: bold; }
+        .resposta-errada { color: red; font-weight: bold; }
         .btn { margin-top: 20px; }
     </style>
 </head>
@@ -181,8 +184,14 @@
                     radios.forEach(radio => {
                         if (radio.value === questao.resposta) {
                             radio.parentElement.classList.add("correta");
-                        } else {
-                            radio.parentElement.classList.add("errada");
+                        }
+                    });
+                } else {
+                    radios.forEach(radio => {
+                        if (radio.value === questao.resposta) {
+                            radio.parentElement.classList.add("resposta-correta");
+                        } else if (radio.checked) {
+                            radio.parentElement.classList.add("resposta-errada");
                         }
                     });
                 }
@@ -191,10 +200,11 @@
             document.getElementById("formulario").style.display = "none";
             document.getElementById("resultado").style.display = "block";
             document.getElementById("nomeResultado").textContent = `Aluno: ${nome}`;
-            document.getElementById("acertosResultado").textContent = `Número de acertos: ${acertos}`;
+            document.getElementById("acertosResultado").textContent = `Acertos: ${acertos} de ${questoes.length}`;
         }
 
-        gerarQuestoes();
+        // Gerar questões ao carregar a página
+        window.onload = gerarQuestoes;
     </script>
 </body>
 </html>
