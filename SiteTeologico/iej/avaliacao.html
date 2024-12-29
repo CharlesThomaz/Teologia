@@ -7,10 +7,8 @@
     <style>
         .correta { background-color: green; color: white; padding: 2px; }
         .errada { background-color: red; color: white; padding: 2px; }
-        .resposta { display: inline-block; width: 40%; }
-        .resposta-correta { color: green; font-weight: bold; }
-        .resposta-errada { color: red; font-weight: bold; }
         .btn { margin-top: 20px; }
+        .resultado { display: none; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -28,114 +26,37 @@
         <button type="button" class="btn" onclick="verificarRespostas()">Finalizar Exame</button>
     </form>
 
-    <div id="resultado" style="display: none;">
+    <div id="resultado" class="resultado">
         <h2>Resultado</h2>
         <p id="nomeResultado"></p>
         <p id="acertosResultado"></p>
+        <hr>
+        <h3>Respostas:</h3>
+        <div id="feedbackRespostas"></div>
     </div>
 
     <script>
         const questoes = [
-            {
-                pergunta: "1. Qual é a definição de Teontologia?",
-                alternativas: ["A) O estudo das ações humanas em relação a Deus.", "B) A disciplina teológica que estuda a existência, natureza e obras de Deus.", "C) O estudo das práticas religiosas em diferentes culturas.", "D) A doutrina que foca exclusivamente na igreja e nos seus membros."],
-                resposta: "B"
-            },
-            {
-                pergunta: "2. Quais são as palavras gregas que compõem o termo Teontologia?",
-                alternativas: ["A) Theo, Ontos, Logos", "B) Theo, Pneuma, Sophia", "C) Theo, Cosmos, Logos", "D) Ontos, Sophia, Ethos"],
-                resposta: "A"
-            },
-            {
-                pergunta: "3. Por que a Teontologia é importante para a vida cristã?",
-                alternativas: ["A) Apenas como um exercício acadêmico.", "B) Para compreender e viver de acordo com os atributos e ações de Deus.", "C) Para estudar a Bíblia e os textos históricos.", "D) Para desenvolver ética social e cultural."],
-                resposta: "B"
-            },
-            {
-                pergunta: "4. Qual dos argumentos filosóficos afirma que o universo apresenta ordem e complexidade que indicam um designer inteligente?",
-                alternativas: ["A) Argumento Ontológico", "B) Argumento Cosmológico", "C) Argumento Teleológico", "D) Argumento Moral"],
-                resposta: "C"
-            },
-            {
-                pergunta: "5. O que significa o amor ágape na Bíblia?",
-                alternativas: ["A) Amor romântico e físico.", "B) Amor incondicional e sacrificial.", "C) Amor entre amigos e companheiros.", "D) Amor natural entre pais e filhos."],
-                resposta: "B"
-            },
-            {
-                pergunta: "6. O que diferencia o amor fileo?",
-                alternativas: ["A) É um amor entre pais e filhos.", "B) É um amor romântico e sensual.", "C) É um amor entre amigos e baseado em respeito mútuo.", "D) É um amor incondicional."],
-                resposta: "C"
-            },
-            {
-                pergunta: "7. Qual é a principal característica do amor eros?",
-                alternativas: ["A) Amor espiritual.", "B) Amor familiar.", "C) Amor romântico e físico.", "D) Amor sacrificial."],
-                resposta: "C"
-            },
-            {
-                pergunta: "8. O que significa o argumento moral?",
-                alternativas: ["A) A moralidade pode ser explicada apenas pela biologia humana.", "B) A existência de normas morais universais aponta para a existência de Deus.", "C) A moralidade é relativa e não exige uma divindade.", "D) A ética é suficiente para estabelecer padrões morais."],
-                resposta: "B"
-            },
-            {
-                pergunta: "9. Quais são os dois tipos principais de atributos de Deus?",
-                alternativas: ["A) Morais e não morais.", "B) Visíveis e invisíveis.", "C) Comunicáveis e incomunicáveis.", "D) Eternos e temporais."],
-                resposta: "C"
-            },
-            {
-                pergunta: "10. Como a justiça de Deus é descrita em Isaías 61:8?",
-                alternativas: ["A) Ele abençoa todos igualmente.", "B) Ele ama a justiça e aborrece a injustiça.", "C) Ele ignora o roubo e a opressão.", "D) Ele pune sem misericórdia."],
-                resposta: "B"
-            },
-            {
-                pergunta: "11. O que significa buscar o Reino de Deus e Sua justiça?",
-                alternativas: ["A) Priorizar os princípios divinos sobre as necessidades terrenas.", "B) Obter riquezas materiais como sinal de bênção.", "C) Viver sem se preocupar com regras.", "D) Submeter-se à autoridade humana."],
-                resposta: "A"
-            },
-            {
-                pergunta: "12. Qual é a base para a eternidade de Deus em Salmo 90:2?",
-                alternativas: ["A) Deus foi criado antes de todas as coisas.", "B) Deus existe de eternidade a eternidade.", "C) Deus é limitado pelo tempo.", "D) Deus não tem controle sobre o tempo."],
-                resposta: "B"
-            },
-            {
-                pergunta: "13. Como o argumento cosmológico explica a existência de Deus?",
-                alternativas: ["A) O universo não precisa de uma causa.", "B) O universo é eterno.", "C) Tudo que começa a existir tem uma causa, e Deus é essa causa.", "D) A ciência já explica tudo."],
-                resposta: "C"
-            },
-            {
-                pergunta: "14. O que caracteriza a imutabilidade de Deus?",
-                alternativas: ["A) Deus muda de acordo com as circunstâncias.", "B) Deus é influenciado pelos eventos.", "C) Deus não muda em Seu ser, caráter ou propósito.", "D) Deus se adapta às necessidades humanas."],
-                resposta: "C"
-            },
-            {
-                pergunta: "15. Quais são os quatro tipos de amor mencionados na Bíblia?",
-                alternativas: ["A) Ágape, Eros, Fileo e Storge.", "B) Amor, Amizade, Família e Religião.", "C) Amor Divino, Amor Natural, Amor Social e Amor Biológico.", "D) Ágape, Caridade, Fileo e Eros."],
-                resposta: "A"
-            },
-            {
-                pergunta: "16. Como a analogia do diretor de cinema explica Deus e o tempo?",
-                alternativas: ["A) Deus é um personagem da história.", "B) Deus está fora do tempo, mas interage com ele.", "C) Deus é limitado pelo tempo.", "D) Deus não controla o tempo."],
-                resposta: "B"
-            },
-            {
-                pergunta: "17. Qual é a essência do amor de Deus em 1 João 4:8?",
-                alternativas: ["A) Deus é justiça.", "B) Deus é amor.", "C) Deus é perdão.", "D) Deus é bondade."],
-                resposta: "B"
-            },
-            {
-                pergunta: "18. O que significa viver com perspectiva de eternidade?",
-                alternativas: ["A) Enfrentar dificuldades lembrando que a vida é temporária e Deus é eterno.", "B) Viver sem responsabilidade no presente.", "C) Ignorar o sofrimento e esperar a vida após a morte.", "D) Buscar riquezas eternas."],
-                resposta: "A"
-            },
-            {
-                pergunta: "19. O que o Salmo 89:14 diz sobre a justiça de Deus?",
-                alternativas: ["A) A justiça é relativa.", "B) A justiça e o direito são a base do trono de Deus.", "C) Deus pune sem misericórdia.", "D) A justiça de Deus é limitada à lei humana."],
-                resposta: "B"
-            },
-            {
-                pergunta: "20. O que significa o amor storge?",
-                alternativas: ["A) Amor entre pais e filhos.", "B) Amor romântico.", "C) Amor entre amigos.", "D) Amor sacrificial."],
-                resposta: "A"
-            }
+            {pergunta: "1. Qual é a definição de Teontologia?", alternativas: ["A) O estudo das ações humanas em relação a Deus.", "B) A disciplina teológica que estuda a existência, natureza e obras de Deus.", "C) O estudo das práticas religiosas em diferentes culturas.", "D) A doutrina que foca exclusivamente na igreja e nos seus membros."], resposta: "B"},
+            {pergunta: "2. Quais são as palavras gregas que compõem o termo Teontologia?", alternativas: ["A) Theo, Ontos, Logos", "B) Theo, Pneuma, Sophia", "C) Theo, Cosmos, Logos", "D) Ontos, Sophia, Ethos"], resposta: "A"},
+            {pergunta: "3. Por que a Teontologia é importante para a vida cristã?", alternativas: ["A) Apenas como um exercício acadêmico.", "B) Para compreender e viver de acordo com os atributos e ações de Deus.", "C) Para estudar a Bíblia e os textos históricos.", "D) Para desenvolver ética social e cultural."], resposta: "B"},
+            {pergunta: "4. Qual dos argumentos filosóficos afirma que o universo apresenta ordem e complexidade que indicam um designer inteligente?", alternativas: ["A) Argumento Ontológico", "B) Argumento Cosmológico", "C) Argumento Teleológico", "D) Argumento Moral"], resposta: "C"},
+            {pergunta: "5. O que significa o amor ágape na Bíblia?", alternativas: ["A) Amor romântico e físico.", "B) Amor incondicional e sacrificial.", "C) Amor entre amigos e companheiros.", "D) Amor natural entre pais e filhos."], resposta: "B"},
+            {pergunta: "6. O que diferencia o amor fileo?", alternativas: ["A) É um amor entre pais e filhos.", "B) É um amor romântico e sensual.", "C) É um amor entre amigos e baseado em respeito mútuo.", "D) É um amor incondicional."], resposta: "C"},
+            {pergunta: "7. Qual é a principal característica do amor eros?", alternativas: ["A) Amor espiritual.", "B) Amor familiar.", "C) Amor romântico e físico.", "D) Amor sacrificial."], resposta: "C"},
+            {pergunta: "8. O que significa o argumento moral?", alternativas: ["A) A moralidade pode ser explicada apenas pela biologia humana.", "B) A existência de normas morais universais aponta para a existência de Deus.", "C) A moralidade é relativa e não exige uma divindade.", "D) A ética é suficiente para estabelecer padrões morais."], resposta: "B"},
+            {pergunta: "9. Quais são os dois tipos principais de atributos de Deus?", alternativas: ["A) Morais e não morais.", "B) Visíveis e invisíveis.", "C) Comunicáveis e incomunicáveis.", "D) Eternos e temporais."], resposta: "C"},
+            {pergunta: "10. Como a justiça de Deus é descrita em Isaías 61:8?", alternativas: ["A) Ele abençoa todos igualmente.", "B) Ele ama a justiça e aborrece a injustiça.", "C) Ele ignora o roubo e a opressão.", "D) Ele pune sem misericórdia."], resposta: "B"},
+            {pergunta: "11. O que significa buscar o Reino de Deus e Sua justiça?", alternativas: ["A) Priorizar os princípios divinos sobre as necessidades terrenas.", "B) Obter riquezas materiais como sinal de bênção.", "C) Viver sem se preocupar com regras.", "D) Submeter-se à autoridade humana."], resposta: "A"},
+            {pergunta: "12. Qual é a base para a eternidade de Deus em Salmo 90:2?", alternativas: ["A) Deus foi criado antes de todas as coisas.", "B) Deus existe de eternidade a eternidade.", "C) Deus é limitado pelo tempo.", "D) Deus não tem controle sobre o tempo."], resposta: "B"},
+            {pergunta: "13. Como o argumento cosmológico explica a existência de Deus?", alternativas: ["A) O universo não precisa de uma causa.", "B) O universo é eterno.", "C) Tudo que começa a existir tem uma causa, e Deus é essa causa.", "D) A ciência já explica tudo."], resposta: "C"},
+            {pergunta: "14. O que caracteriza a imutabilidade de Deus?", alternativas: ["A) Deus muda de acordo com as circunstâncias.", "B) Deus é influenciado pelos eventos.", "C) Deus não muda em Seu ser, caráter ou propósito.", "D) Deus se adapta às necessidades humanas."], resposta: "C"},
+            {pergunta: "15. Quais são os quatro tipos de amor mencionados na Bíblia?", alternativas: ["A) Ágape, Eros, Fileo e Storge.", "B) Amor, Amizade, Família e Religião.", "C) Amor Divino, Amor Natural, Amor Social e Amor Biológico.", "D) Ágape, Caridade, Fileo e Eros."], resposta: "A"},
+            {pergunta: "16. Como a analogia do diretor de cinema explica Deus e o tempo?", alternativas: ["A) Deus é um personagem da história.", "B) Deus está fora do tempo, mas interage com ele.", "C) Deus é limitado pelo tempo.", "D) Deus não controla o tempo."], resposta: "B"},
+            {pergunta: "17. Qual é a essência do amor de Deus em 1 João 4:8?", alternativas: ["A) Deus é justiça.", "B) Deus é amor.", "C) Deus é perdão.", "D) Deus é bondade."], resposta: "B"},
+            {pergunta: "18. O que significa viver com perspectiva de eternidade?", alternativas: ["A) Enfrentar dificuldades lembrando que a vida é temporária e Deus é eterno.", "B) Viver sem responsabilidade no presente.", "C) Ignorar o sofrimento e esperar a vida após a morte.", "D) Buscar riquezas eternas."], resposta: "A"},
+            {pergunta: "19. O que o Salmo 89:14 diz sobre a justiça de Deus?", alternativas: ["A) A justiça é relativa.", "B) A justiça e o direito são a base do trono de Deus.", "C) Deus pune sem misericórdia.", "D) A justiça de Deus é limitada à lei humana."], resposta: "B"},
+            {pergunta: "20. O que significa o amor storge?", alternativas: ["A) Amor entre pais e filhos.", "B) Amor romântico.", "C) Amor entre amigos.", "D) Amor sacrificial."], resposta: "A"}
         ];
 
         function gerarQuestoes() {
@@ -199,6 +120,20 @@
             document.getElementById("nomeResultado").textContent = `Aluno: ${nome}`;
             document.getElementById("acertosResultado").textContent = `Acertos: ${acertos} de ${questoes.length}`;
 
+            // Exibe feedback de respostas
+            let feedbackHTML = '';
+            questoes.forEach((questao, index) => {
+                const questaoElement = document.querySelectorAll(`.questao`)[index];
+                const alternativas = questaoElement.querySelectorAll('input[type="radio"]');
+                const selectedOption = Array.from(alternativas).find(input => input.checked);
+                const selectedLabel = selectedOption ? selectedOption.nextElementSibling.innerHTML : 'Nenhuma selecionada';
+
+                feedbackHTML += `<p><strong>${questao.pergunta}</strong><br>`;
+                feedbackHTML += `Sua Resposta: ${selectedLabel}<br>`;
+                feedbackHTML += `Resposta Correta: ${questao.alternativas[String.fromCharCode(65 + questao.resposta.charCodeAt(0) - 65)]}</p>`;
+            });
+
+            document.getElementById("feedbackRespostas").innerHTML = feedbackHTML;
             document.getElementById("resultado").style.display = "block";
             document.getElementById("formulario").style.display = "none";
         }
