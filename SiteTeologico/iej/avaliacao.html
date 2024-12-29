@@ -151,12 +151,15 @@
 
                 questao.alternativas.forEach((alternativa, i) => {
                     const label = document.createElement("label");
+                    label.innerHTML = alternativa;
+                    label.setAttribute("for", `questao${index}_alternativa${i}`);
                     const input = document.createElement("input");
                     input.type = "radio";
                     input.name = `questao${index}`;
-                    input.value = String.fromCharCode(65 + i); // A, B, C, D
-                    label.appendChild(input);
-                    label.appendChild(document.createTextNode(alternativa));
+                    input.id = `questao${index}_alternativa${i}`;
+                    input.value = String.fromCharCode(65 + i); // 'A', 'B', 'C', 'D'
+
+                    divQuestao.appendChild(input);
                     divQuestao.appendChild(label);
                     divQuestao.appendChild(document.createElement("br"));
                 });
@@ -168,43 +171,38 @@
         function verificarRespostas() {
             const nome = document.getElementById("nome").value;
             let acertos = 0;
+            const respostaSelecionada = {};
 
             questoes.forEach((questao, index) => {
-                const radios = document.getElementsByName(`questao${index}`);
-                let respostaSelecionada = null;
-
-                radios.forEach(radio => {
-                    if (radio.checked) {
-                        respostaSelecionada = radio.value;
-                    }
-                });
-
-                // Verifica se a resposta está correta
                 const questaoElement = document.querySelectorAll(`.questao`)[index];
-                const alternativas = questaoElement.querySelectorAll('label');
-                alternativas.forEach((alternativa, i) => {
-                    if (String.fromCharCode(65 + i) === questao.resposta) {
-                        alternativa.classList.add("correta");
-                    } else {
-                        alternativa.classList.add("errada");
-                    }
-
-                    if (respostaSelecionada === questao.resposta) {
-                        acertos++;
+                const alternativas = questaoElement.querySelectorAll('input[type="radio"]');
+                alternativas.forEach((input, i) => {
+                    if (input.checked) {
+                        respostaSelecionada[`questao${index}`] = input.value;
                     }
                 });
+
+                const respostas = questaoElement.querySelectorAll('label');
+                respostas.forEach((resposta, i) => {
+                    if (String.fromCharCode(65 + i) === questao.resposta) {
+                        resposta.classList.add("correta");
+                    } else {
+                        resposta.classList.add("errada");
+                    }
+                });
+
+                if (respostaSelecionada[`questao${index}`] === questao.resposta) {
+                    acertos++;
+                }
             });
 
-            // Mostra o nome e a quantidade de acertos
             document.getElementById("nomeResultado").textContent = `Aluno: ${nome}`;
             document.getElementById("acertosResultado").textContent = `Acertos: ${acertos} de ${questoes.length}`;
 
-            // Exibe o resultado
             document.getElementById("resultado").style.display = "block";
             document.getElementById("formulario").style.display = "none";
         }
 
-        // Gerar questões ao carregar a página
         window.onload = gerarQuestoes;
     </script>
 </body>
