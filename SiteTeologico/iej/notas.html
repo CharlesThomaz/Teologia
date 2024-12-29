@@ -52,32 +52,54 @@
     </div>
 
     <script>
-        // Objeto contendo os alunos e suas notas
         const notas = {
-            "CHARLES THOMAZ DOS SANTOS":{Prolegômenos: 10, Bibliologia: 10, Teontologia: 10},
+            "CHARLES THOMAZ DOS SANTOS ":{Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 },
             "ANA PAULA MIRANDA DE AZEVEDO": { Prolegômenos: 10, Bibliologia: 10 },
             "AILTON DIAS TEIXEIRA": { Prolegômenos: 10, Bibliologia: 10 },
+            "ALBERTO GERALDO PIRES MIRANDA JUNIOR": {},
+            "CAMILA APARECIDA VELOSO": {},
             "CLÁUDIA LEONARDO COSTA": { Prolegômenos: 10, Bibliologia: 10 },
             "CAMILLE FERNANDES SILVA": { Prolegômenos: 10, Bibliologia: 10 },
             "CARINE FERNANDES SILVA": { Prolegômenos: 10, Bibliologia: 10 },
+            "CÁSSIO MURILO DE OLIVEIRA": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 },
+            "CLEBER ANTÔNIO ABREU": { Prolegômenos: 10, Bibliologia: 10 },
             "CLEONICE VIANA SILVA": { Prolegômenos: 9, Bibliologia: 10 },
+            "DANIEL RODRIGUES NUNES": {},
+            "DEIVISSON PITTA LOUREDO": {},
+            "JEDSON": { Bibliologia: 10 },
+            "JEFFERSON": { Bibliologia: 10, Teontologia: 9.3 },
             "DENIZE ACÁSSIA MAIA DOS SANTOS": { Prolegômenos: 10, Bibliologia: 10 },
             "ÉRICA GERALDA OTONI": { Prolegômenos: 10 },
             "FÁBIO DIAS TEIXEIRA": { Prolegômenos: 10, Bibliologia: 10 },
             "FILEMON ANDRÉ DOS SANTOS": { Prolegômenos: 9, Bibliologia: 10 },
             "GABRIEL GUILHERME DE PAULA": { Prolegômenos: 10, Bibliologia: 10 },
+            "CRISTINA": { Bibliologia: 10 },
             "GERALDA ALZIRA DE ALMEIDA FERNANDES": { Prolegômenos: 9.5, Bibliologia: 10 },
+            "GELSON PEREIRA": { Prolegômenos: 10, Bibliologia: 10 },
+            "GERALDO CRISTIANO MARTINS F. XAVIER": { Prolegômenos: 10, Bibliologia: 10 },
+            "ISAÍAS VIANA TEXEIRA": { Prolegômenos: 10, Bibliologia: 10 },
+            "ISMAEL VIANA TEIXEIRA": { Prolegômenos: 10, Bibliologia: 10 },
+            "JOÃO PAULO BERALDO DA SILVA": { Prolegômenos: 10, Bibliologia: 10 },
+            "JOSÉ ARMANDO ALVES": { Prolegômenos: 10, Bibliologia: 10 },
+            "JESSÉ ITALLO DE LIMA SOUZA": { Prolegômenos: 10, Bibliologia: 10 },
+            "JÚLIO CÉSAR PRADO": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 },
+            "LUIZ ANTONIO PRUDENCINI": { Prolegômenos: 10 },
+            "LUIS HENRIQUE ARAÚJO RUAS": { Prolegômenos: 10, Bibliologia: 10 },
+            "MARCOS GABRIEL TOMAZ MOREIRA": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 },
+            "MARIA JÚLIA DIAS TEIXEIRA": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 },
+            "MARIA JULIANA ALVES LESSA": { Prolegômenos: 10, Bibliologia: 10 },
             "PATRICK FLAVIANO MORAIS": { Prolegômenos: 9 },
+            "POLLYANA SANTIAGO RODRIGUES SILVA MIRANDA": { Prolegômenos: 10, Bibliologia: 10 },
             "ROSANGELA DE F.V. SILVA": { Prolegômenos: 7 },
             "SELMINHA DA PENHA FRANCO": { Prolegômenos: 10, Bibliologia: 10 },
             "STEPHANIE LUIZA GUIMARÃES BRAGA": { Prolegômenos: 10, Bibliologia: 10 },
             "VÂNDILSON ANTÔNIO SILVA": { Prolegômenos: 10, Bibliologia: 10 },
             "VANDERLEY CARVALHO LESSA": { Prolegômenos: 10, Bibliologia: 10 },
+            "MOISES": { Bibliologia: 10 },
             "WARLEY BARBOSA DOS SANTOS LOPES": { Prolegômenos: 10, Bibliologia: 10 },
-            "SALETE RIBEIRO DE SOUZA PEÇANHA DA CRUZ": { Prolegômenos: 10, Bibliologia: 10 }
+            "SALETE RIBEIRO DE SOUZA PEÇANHA DA CRUZ": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 }
         };
 
-        // Função para verificar as notas
         function verificarNota() {
             const nome = document.getElementById("nomeAluno").value.trim().toUpperCase();
             const resultado = document.getElementById("resultado");
