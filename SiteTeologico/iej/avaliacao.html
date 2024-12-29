@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Teontologia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz de Teontologia</h1>
+    <form id="nameForm">
+        <label for="name">Digite seu nome:</label>
+        <input type="text" id="name" name="name" required>
+        <button type="button" onclick="startQuiz()">Iniciar Quiz</button>
+    </form>
+
+    <form id="quizForm" style="display: none;">
+        <!-- Perguntas -->
+        <div class="question">
+            <p>1. Qual é a definição de Teontologia?</p>
+            <input type="radio" name="q1" value="A"> A) O estudo das ações humanas em relação a Deus.<br>
+            <input type="radio" name="q1" value="B"> B) A disciplina teológica que estuda a existência, natureza e obras de Deus.<br>
+            <input type="radio" name="q1" value="C"> C) O estudo das práticas religiosas em diferentes culturas.<br>
+            <input type="radio" name="q1" value="D"> D) A doutrina que foca exclusivamente na igreja e nos seus membros.<br>
+        </div>
+
+        <div class="question">
+            <p>2. Quais são as palavras gregas que compõem o termo Teontologia?</p>
+            <input type="radio" name="q2" value="A"> A) Theo, Ontos, Logos<br>
+            <input type="radio" name="q2" value="B"> B) Theo, Pneuma, Sophia<br>
+            <input type="radio" name="q2" value="C"> C) Theo, Cosmos, Logos<br>
+            <input type="radio" name="q2" value="D"> D) Ontos, Sophia, Ethos<br>
+        </div>
+
+        <!-- Outras perguntas omitidas por brevidade -->
+
+        <div class="question">
+            <p>20. O que significa o amor storge?</p>
+            <input type="radio" name="q20" value="A"> A) Amor entre pais e filhos.<br>
+            <input type="radio" name="q20" value="B"> B) Amor romântico.<br>
+            <input type="radio" name="q20" value="C"> C) Amor entre amigos.<br>
+            <input type="radio" name="q20" value="D"> D) Amor sacrificial.<br>
+        </div>
+
+        <button type="button" onclick="checkAnswers()">Verificar Respostas</button>
+    </form>
+
+    <div id="result" class="result"></div>
+
+    <script>
+        const answers = {
+            q1: "B",
+            q2: "A",
+            // Adicione as respostas corretas de cada pergunta aqui.
+            q20: "A"
+        };
+
+        function startQuiz() {
+            const nameInput = document.getElementById('name');
+            if (nameInput.value.trim() === "") {
+                alert("Por favor, insira seu nome antes de começar o quiz.");
+                return;
+            }
+
+            document.getElementById('nameForm').style.display = 'none';
+            document.getElementById('quizForm').style.display = 'block';
+        }
+
+        function checkAnswers() {
+            const form = document.getElementById('quizForm');
+            const resultDiv = document.getElementById('result');
+            const nameInput = document.getElementById('name');
+            let score = 0;
+            let total = 0;
+
+            // Limpa os resultados anteriores
+            resultDiv.innerHTML = "";
+
+            // Verifica cada resposta
+            for (const [key, correctAnswer] of Object.entries(answers)) {
+                total++;
+                const selected = form.elements[key];
+                let answeredCorrectly = false;
+
+                for (const option of selected) {
+                    if (option.checked) {
+                        if (option.value === correctAnswer) {
+                            answeredCorrectly = true;
+                            score++;
+                            option.parentElement.style.color = "green";
+                        } else {
+                            option.parentElement.style.color = "red";
+                        }
+                    }
+                }
+
+                if (!answeredCorrectly) {
+                    resultDiv.innerHTML += `<p>Você errou a questão ${key.slice(1)}. Resposta correta: ${correctAnswer}</p>`;
+                }
+            }
+
+            // Exibe o resultado final
+            resultDiv.innerHTML += `<p>${nameInput.value}, sua pontuação: ${score}/${total}</p>`;
+        }
+    </script>
+</body>
+</html>
