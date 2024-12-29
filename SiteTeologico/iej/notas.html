@@ -121,40 +121,48 @@
             "SALETE RIBEIRO DE SOUZA PEÇANHA DA CRUZ": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 }
         };
 
-        function verificarNota() {
-            const nome = document.getElementById("nomeAluno").value.trim().toUpperCase();
-            const resultado = document.getElementById("resultado");
-            const resultadosEncontrados = [];
+        function removerAcentos(str) {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
 
-            // Verificar se o nome não é nulo ou vazio
-            if (!nome) {
-                resultado.textContent = "Por favor, digite um nome válido.";
-                return;
-            }
+function verificarNota() {
+    const nome = removerAcentos(document.getElementById("nomeAluno").value.trim().toUpperCase());
+    const resultado = document.getElementById("resultado");
+    const resultadosEncontrados = [];
 
-            for (const [nomeCompleto, disciplinas] of Object.entries(notas)) {
-                if (nomeCompleto.includes(nome)) {
-                    let textoNotas = `<strong>${nomeCompleto}</strong>:<br>`;
-                    let encontrouNota = false;
-                    for (const [disciplina, nota] of Object.entries(disciplinas)) {
-                        // Verificar se a nota não é nula ou vazia
-                        if (nota != null && nota !== "") {
-                            textoNotas += `- ${disciplina}: ${nota}<br>`;
-                            encontrouNota = true;
-                        }
-                    }
-                    if (encontrouNota) {
-                        resultadosEncontrados.push(textoNotas);
-                    }
+    // Verificar se o nome não é nulo ou vazio
+    if (!nome) {
+        resultado.textContent = "Por favor, digite um nome válido.";
+        return;
+    }
+
+    for (const [nomeCompleto, disciplinas] of Object.entries(notas)) {
+        const nomeNormalizado = removerAcentos(nomeCompleto.toUpperCase());
+
+        // Verificar se o nome contém o nome digitado, ignorando acentos
+        if (nomeNormalizado.includes(nome)) {
+            let textoNotas = `<strong>${nomeCompleto}</strong>:<br>`;
+            let encontrouNota = false;
+            for (const [disciplina, nota] of Object.entries(disciplinas)) {
+                // Verificar se a nota não é nula ou vazia
+                if (nota != null && nota !== "") {
+                    textoNotas += `- ${disciplina}: ${nota}<br>`;
+                    encontrouNota = true;
                 }
             }
-
-            if (resultadosEncontrados.length > 0) {
-                resultado.innerHTML = resultadosEncontrados.join("<hr>");
-            } else {
-                resultado.textContent = `Nenhum aluno encontrado com "${nome}".`;
+            if (encontrouNota) {
+                resultadosEncontrados.push(textoNotas);
             }
         }
+    }
+
+    if (resultadosEncontrados.length > 0) {
+        resultado.innerHTML = resultadosEncontrados.join("<hr>");
+    } else {
+        resultado.textContent = `Nenhum aluno encontrado com "${nome}".`;
+    }
+}
+
     </script>
 </body>
 </html>
