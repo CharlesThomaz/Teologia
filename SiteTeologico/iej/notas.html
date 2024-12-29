@@ -53,7 +53,6 @@
 
     <script>
         const notas = {
-            "CHARLES THOMAZ DOS SANTOS ":{Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 },
             "ANA PAULA MIRANDA DE AZEVEDO": { Prolegômenos: 10, Bibliologia: 10 },
             "AILTON DIAS TEIXEIRA": { Prolegômenos: 10, Bibliologia: 10 },
             "ALBERTO GERALDO PIRES MIRANDA JUNIOR": {},
@@ -100,13 +99,18 @@
             "SALETE RIBEIRO DE SOUZA PEÇANHA DA CRUZ": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 }
         };
 
+        function removerAcentos(str) {
+            return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        }
+
         function verificarNota() {
-            const nome = document.getElementById("nomeAluno").value.trim().toUpperCase();
+            const nome = removerAcentos(document.getElementById("nomeAluno").value.trim()).toUpperCase();
             const resultado = document.getElementById("resultado");
             const resultadosEncontrados = [];
 
             for (const [nomeCompleto, disciplinas] of Object.entries(notas)) {
-                if (nomeCompleto.includes(nome)) {
+                const nomeCompletoSemAcento = removerAcentos(nomeCompleto).toUpperCase();
+                if (nomeCompletoSemAcento.includes(nome)) {
                     let textoNotas = `<strong>${nomeCompleto}</strong>:<br>`;
                     for (const [disciplina, nota] of Object.entries(disciplinas)) {
                         textoNotas += `- ${disciplina}: ${nota}<br>`;
