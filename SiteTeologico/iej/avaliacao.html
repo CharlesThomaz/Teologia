@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questionário Teológico</title>
+    <title>Quiz de Teontologia</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            line-height: 1.6;
             margin: 20px;
         }
         .question {
             margin-bottom: 20px;
         }
-        .question label {
-            display: block;
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
         }
         .correct {
             color: green;
@@ -21,96 +23,98 @@
         .incorrect {
             color: red;
         }
-        .result {
-            font-weight: bold;
-        }
-        #result {
-            margin-top: 20px;
-        }
     </style>
 </head>
 <body>
-    <h1>Questionário Teológico</h1>
-    <form id="quizForm" onsubmit="return calculateResult()">
+    <h1>Quiz de Teontologia</h1>
+    <form id="nameForm">
+        <label for="name">Digite seu nome:</label>
+        <input type="text" id="name" name="name" required>
+        <button type="button" onclick="startQuiz()">Iniciar Quiz</button>
+    </form>
+
+    <form id="quizForm" style="display: none;">
+        <!-- Perguntas -->
         <div class="question">
             <p>1. Qual é a definição de Teontologia?</p>
-            <label><input type="radio" name="q1" value="A"> A) O estudo das ações humanas em relação a Deus.</label>
-            <label><input type="radio" name="q1" value="B"> B) A disciplina teológica que estuda a existência, natureza e obras de Deus.</label>
-            <label><input type="radio" name="q1" value="C"> C) O estudo das práticas religiosas em diferentes culturas.</label>
-            <label><input type="radio" name="q1" value="D"> D) A doutrina que foca exclusivamente na igreja e nos seus membros.</label>
+            <input type="radio" name="q1" value="A"> A) O estudo das ações humanas em relação a Deus.<br>
+            <input type="radio" name="q1" value="B"> B) A disciplina teológica que estuda a existência, natureza e obras de Deus.<br>
+            <input type="radio" name="q1" value="C"> C) O estudo das práticas religiosas em diferentes culturas.<br>
+            <input type="radio" name="q1" value="D"> D) A doutrina que foca exclusivamente na igreja e nos seus membros.<br>
         </div>
 
         <div class="question">
             <p>2. Quais são as palavras gregas que compõem o termo Teontologia?</p>
-            <label><input type="radio" name="q2" value="A"> A) Theo, Ontos, Logos</label>
-            <label><input type="radio" name="q2" value="B"> B) Theo, Pneuma, Sophia</label>
-            <label><input type="radio" name="q2" value="C"> C) Theo, Cosmos, Logos</label>
-            <label><input type="radio" name="q2" value="D"> D) Ontos, Sophia, Ethos</label>
+            <input type="radio" name="q2" value="A"> A) Theo, Ontos, Logos<br>
+            <input type="radio" name="q2" value="B"> B) Theo, Pneuma, Sophia<br>
+            <input type="radio" name="q2" value="C"> C) Theo, Cosmos, Logos<br>
+            <input type="radio" name="q2" value="D"> D) Ontos, Sophia, Ethos<br>
         </div>
 
         <div class="question">
             <p>3. Por que a Teontologia é importante para a vida cristã?</p>
-            <label><input type="radio" name="q3" value="A"> A) Apenas como um exercício acadêmico.</label>
-            <label><input type="radio" name="q3" value="B"> B) Para compreender e viver de acordo com os atributos e ações de Deus.</label>
-            <label><input type="radio" name="q3" value="C"> C) Para estudar a Bíblia e os textos históricos.</label>
-            <label><input type="radio" name="q3" value="D"> D) Para desenvolver ética social e cultural.</label>
+            <input type="radio" name="q3" value="A"> A) Apenas como um exercício acadêmico.<br>
+            <input type="radio" name="q3" value="B"> B) Para compreender e viver de acordo com os atributos e ações de Deus.<br>
+            <input type="radio" name="q3" value="C"> C) Para estudar a Bíblia e os textos históricos.<br>
+            <input type="radio" name="q3" value="D"> D) Para desenvolver ética social e cultural.<br>
         </div>
 
         <div class="question">
             <p>4. Qual dos argumentos filosóficos afirma que o universo apresenta ordem e complexidade que indicam um designer inteligente?</p>
-            <label><input type="radio" name="q4" value="A"> A) Argumento Ontológico</label>
-            <label><input type="radio" name="q4" value="B"> B) Argumento Cosmológico</label>
-            <label><input type="radio" name="q4" value="C"> C) Argumento Teleológico</label>
-            <label><input type="radio" name="q4" value="D"> D) Argumento Moral</label>
+            <input type="radio" name="q4" value="A"> A) Argumento Ontológico<br>
+            <input type="radio" name="q4" value="B"> B) Argumento Cosmológico<br>
+            <input type="radio" name="q4" value="C"> C) Argumento Teleológico<br>
+            <input type="radio" name="q4" value="D"> D) Argumento Moral<br>
         </div>
 
         <div class="question">
             <p>5. O que significa o amor ágape na Bíblia?</p>
-            <label><input type="radio" name="q5" value="A"> A) Amor romântico e físico.</label>
-            <label><input type="radio" name="q5" value="B"> B) Amor incondicional e sacrificial.</label>
-            <label><input type="radio" name="q5" value="C"> C) Amor entre amigos e companheiros.</label>
-            <label><input type="radio" name="q5" value="D"> D) Amor natural entre pais e filhos.</label>
+            <input type="radio" name="q5" value="A"> A) Amor romântico e físico.<br>
+            <input type="radio" name="q5" value="B"> B) Amor incondicional e sacrificial.<br>
+            <input type="radio" name="q5" value="C"> C) Amor entre amigos e companheiros.<br>
+            <input type="radio" name="q5" value="D"> D) Amor natural entre pais e filhos.<br>
         </div>
 
         <div class="question">
             <p>6. O que diferencia o amor fileo?</p>
-            <label><input type="radio" name="q6" value="A"> A) É um amor entre pais e filhos.</label>
-            <label><input type="radio" name="q6" value="B"> B) É um amor romântico e sensual.</label>
-            <label><input type="radio" name="q6" value="C"> C) É um amor entre amigos e baseado em respeito mútuo.</label>
-            <label><input type="radio" name="q6" value="D"> D) É um amor incondicional.</label>
+            <input type="radio" name="q6" value="A"> A) É um amor entre pais e filhos.<br>
+            <input type="radio" name="q6" value="B"> B) É um amor romântico e sensual.<br>
+            <input type="radio" name="q6" value="C"> C) É um amor entre amigos e baseado em respeito mútuo.<br>
+            <input type="radio" name="q6" value="D"> D) É um amor incondicional.<br>
         </div>
 
         <div class="question">
             <p>7. Qual é a principal característica do amor eros?</p>
-            <label><input type="radio" name="q7" value="A"> A) Amor espiritual.</label>
-            <label><input type="radio" name="q7" value="B"> B) Amor familiar.</label>
-            <label><input type="radio" name="q7" value="C"> C) Amor romântico e físico.</label>
-            <label><input type="radio" name="q7" value="D"> D) Amor sacrificial.</label>
+            <input type="radio" name="q7" value="A"> A) Amor espiritual.<br>
+            <input type="radio" name="q7" value="B"> B) Amor familiar.<br>
+            <input type="radio" name="q7" value="C"> C) Amor romântico e físico.<br>
+            <input type="radio" name="q7" value="D"> D) Amor sacrificial.<br>
         </div>
 
         <div class="question">
             <p>8. O que significa o argumento moral?</p>
-            <label><input type="radio" name="q8" value="A"> A) A moralidade pode ser explicada apenas pela biologia humana.</label>
-            <label><input type="radio" name="q8" value="B"> B) A existência de normas morais universais aponta para a existência de Deus.</label>
-            <label><input type="radio" name="q8" value="C"> C) A moralidade é relativa e não exige uma divindade.</label>
-            <label><input type="radio" name="q8" value="D"> D) A ética é suficiente para estabelecer padrões morais.</label>
+            <input type="radio" name="q8" value="A"> A) A moralidade pode ser explicada apenas pela biologia humana.<br>
+            <input type="radio" name="q8" value="B"> B) A existência de normas morais universais aponta para a existência de Deus.<br>
+            <input type="radio" name="q8" value="C"> C) A moralidade é relativa e não exige uma divindade.<br>
+            <input type="radio" name="q8" value="D"> D) A ética é suficiente para estabelecer padrões morais.<br>
         </div>
 
         <div class="question">
             <p>9. Quais são os dois tipos principais de atributos de Deus?</p>
-            <label><input type="radio" name="q9" value="A"> A) Morais e não morais.</label>
-            <label><input type="radio" name="q9" value="B"> B) Visíveis e invisíveis.</label>
-            <label><input type="radio" name="q9" value="C"> C) Comunicáveis e incomunicáveis.</label>
-            <label><input type="radio" name="q9" value="D"> D) Eternos e temporais.</label>
+            <input type="radio" name="q9" value="A"> A) Morais e não morais.<br>
+            <input type="radio" name="q9" value="B"> B) Visíveis e invisíveis.<br>
+            <input type="radio" name="q9" value="C"> C) Comunicáveis e incomunicáveis.<br>
+            <input type="radio" name="q9" value="D"> D) Eternos e temporais.<br>
         </div>
 
         <div class="question">
             <p>10. Como a justiça de Deus é descrita em Isaías 61:8?</p>
-            <label><input type="radio" name="q10" value="A"> A) Ele abençoa todos igualmente.</label>
-            <label><input type="radio" name="q10" value="B"> B) Ele ama a justiça e aborrece a injustiça.</label>
-            <label><input type="radio" name="q10" value="C"> C) Ele ignora o roubo e a opressão.</label>
-            <label><input type="radio" name="q10" value="D"> D) Ele pune sem misericórdia.</label>
+            <input type="radio" name="q10" value="A"> A) Ele abençoa todos igualmente.<br>
+            <input type="radio" name="q10" value="B"> B) Ele ama a justiça e aborrece a injustiça.<br>
+            <input type="radio" name="q10" value="C"> C) Ele ignora o roubo e a opressão.<br>
+            <input type="radio" name="q10" value="D"> D) Ele pune sem misericórdia.<br>
         </div>
+
         <div class="question">
             <p>11. O que significa buscar o Reino de Deus e Sua justiça?</p>
             <input type="radio" name="q11" value="A"> A) Priorizar os princípios divinos sobre as necessidades terrenas.<br>
@@ -191,75 +195,60 @@
             <input type="radio" name="q20" value="D"> D) Deus depende do conhecimento humano para saber sobre o mundo.<br>
         </div>
 
-        
-        <div class="question">
-            <p>Nome: <input type="text" id="name" required></p>
-        </div>
-
-        <button type="submit">Verificar Respostas</button>
+        <button type="submit">Enviar Respostas</button>
     </form>
 
     <div id="result" class="result"></div>
 
     <script>
-        const correctAnswers = {
-            q1: "B",
-            q2: "A",
-            q3: "B",
-            q4: "C",
-            q5: "B",
-            q6: "C",
-            q7: "C",
-            q8: "B",
-            q9: "C",
-            q10: "B",
-            q11: "A",
-            q12: "B",
-            q13: "C",
-            q14: "C",
-            q15: "A",
-            q16: "B",
-            q17: "B",
-            q18: "A",
-            q19: "B",
-            q20: "A"
-        };
-
-        function calculateResult() {
-            let score = 0;
-            let totalQuestions = Object.keys(correctAnswers).length;
-            let resultText = '';
-            const form = document.forms['quizForm'];
-            const name = document.getElementById('name').value;
-
-            if (!name) {
-                alert('Por favor, insira seu nome!');
-                return false;
+        function startQuiz() {
+            var name = document.getElementById("name").value;
+            if (name) {
+                document.getElementById("nameForm").style.display = "none";
+                document.getElementById("quizForm").style.display = "block";
+            } else {
+                alert("Por favor, insira seu nome para iniciar.");
             }
+        }
 
-            for (let i = 1; i <= totalQuestions; i++) {
-                const question = 'q' + i;
-                const selectedAnswer = form[question].value;
-                const correctAnswer = correctAnswers[question];
+        document.getElementById("quizForm").onsubmit = function(event) {
+            event.preventDefault();
+            var correctAnswers = 0;
+            var totalQuestions = 20;
+            var formData = new FormData(event.target);
 
-                const questionDiv = document.querySelector('.question:nth-child(' + i + ')');
+            var answers = {
+                q1: "B",
+                q2: "A",
+                q3: "B",
+                q4: "C",
+                q5: "B",
+                q6: "C",
+                q7: "C",
+                q8: "B",
+                q9: "C",
+                q10: "B",
+                q11: "A",
+                q12: "B",
+                q13: "C",
+                q14: "B",
+                q15: "A",
+                q16: "C",
+                q17: "C",
+                q18: "A",
+                q19: "A",
+                q20: "B"
+            };
 
-                if (selectedAnswer === correctAnswer) {
-                    score++;
-                    questionDiv.style.color = 'green';
-                } else {
-                    questionDiv.style.color = 'red';
-                    resultText += `<p>Questão ${i}: Resposta incorreta! Resposta correta: ${correctAnswer}</p>`;
+            formData.forEach(function(value, key) {
+                if (answers[key] === value) {
+                    correctAnswers++;
                 }
-            }
+            });
 
-            resultText = `<p>${name}, você acertou ${score} de ${totalQuestions} perguntas.</p>`;
-            document.getElementById('result').innerHTML = resultText;
-            return false;
+            var resultMessage = "Você acertou " + correctAnswers + " de " + totalQuestions + " perguntas.";
+            document.getElementById("result").textContent = resultMessage;
         }
     </script>
 </body>
 </html>
-
-
-      
