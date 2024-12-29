@@ -18,6 +18,10 @@
         .incorrect {
             color: red;
         }
+        .correct-answer {
+            font-style: italic;
+            color: blue;
+        }
     </style>
 </head>
 <body>
@@ -189,7 +193,7 @@
             <input type="radio" name="q20" value="D"> D) Deus depende do conhecimento humano para saber sobre o mundo.<br>
         </div>
 
-        <button type="submit">Enviar Respostas</button>
+        button type="submit">Enviar Respostas</button>
     </form>
 
     <div id="result" class="result"></div>
@@ -236,11 +240,20 @@
 
             formData.forEach(function(value, key) {
                 var questionElement = document.querySelector(`input[name="${key}"]`).closest('.question');
+                var options = questionElement.querySelectorAll('input[type="radio"]');
+                var correctAnswer = answers[key];
+
                 if (answers[key] === value) {
                     correctAnswers++;
                     questionElement.classList.add('correct');
                 } else {
                     questionElement.classList.add('incorrect');
+                    options.forEach(function(option) {
+                        if (option.value === correctAnswer) {
+                            option.nextSibling.style.color = "blue"; // Color the correct answer in blue
+                            option.nextSibling.innerHTML += " (Resposta correta)"; // Show the correct answer next to the wrong one
+                        }
+                    });
                 }
             });
 
