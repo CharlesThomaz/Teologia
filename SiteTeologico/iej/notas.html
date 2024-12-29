@@ -45,15 +45,16 @@
 <body>
     <div class="container">
         <h2>Consulta de Notas</h2>
-        <p>Digite o seu nome para verificar as notas:</p>
-        <input type="text" id="nomeAluno" placeholder="Digite o seu nome">
+        <p>Digite o nome ou parte do nome para verificar as notas:</p>
+        <input type="text" id="nomeAluno" placeholder="Digite o nome do aluno">
         <button onclick="verificarNota()">Verificar Notas</button>
         <div id="resultado" class="result"></div>
     </div>
 
     <script>
-        // Objeto contendo as notas de todos os alunos
+        // Objeto contendo os alunos e suas notas
         const notas = {
+            "CHARLES THOMAZ DOS SANTOS":{Prolegômenos: 10, Bibliologia: 10, Teontologia: 10},
             "ANA PAULA MIRANDA DE AZEVEDO": { Prolegômenos: 10, Bibliologia: 10 },
             "AILTON DIAS TEIXEIRA": { Prolegômenos: 10, Bibliologia: 10 },
             "CLÁUDIA LEONARDO COSTA": { Prolegômenos: 10, Bibliologia: 10 },
@@ -80,16 +81,22 @@
         function verificarNota() {
             const nome = document.getElementById("nomeAluno").value.trim().toUpperCase();
             const resultado = document.getElementById("resultado");
+            const resultadosEncontrados = [];
 
-            if (notas[nome] !== undefined) {
-                const alunoNotas = notas[nome];
-                let textoNotas = `As notas de ${nome} são:<br>`;
-                for (const [disciplina, nota] of Object.entries(alunoNotas)) {
-                    textoNotas += `${disciplina}: ${nota}<br>`;
+            for (const [nomeCompleto, disciplinas] of Object.entries(notas)) {
+                if (nomeCompleto.includes(nome)) {
+                    let textoNotas = `<strong>${nomeCompleto}</strong>:<br>`;
+                    for (const [disciplina, nota] of Object.entries(disciplinas)) {
+                        textoNotas += `- ${disciplina}: ${nota}<br>`;
+                    }
+                    resultadosEncontrados.push(textoNotas);
                 }
-                resultado.innerHTML = textoNotas;
+            }
+
+            if (resultadosEncontrados.length > 0) {
+                resultado.innerHTML = resultadosEncontrados.join("<hr>");
             } else {
-                resultado.textContent = `Aluno "${nome}" não encontrado.`;
+                resultado.textContent = `Nenhum aluno encontrado com "${nome}".`;
             }
         }
     </script>
