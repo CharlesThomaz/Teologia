@@ -1,17 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz de Teontologia</title>
+    <title>Questionário Teológico</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-        }
         .question {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .result {
             margin-top: 20px;
@@ -26,37 +21,36 @@
     </style>
 </head>
 <body>
-    <h1>Quiz de Teontologia</h1>
-    <form id="nameForm">
-        <label for="name">Digite seu nome:</label>
-        <input type="text" id="name" name="name" required>
-        <button type="button" onclick="startQuiz()">Iniciar Quiz</button>
-    </form>
+    <h1>Questionário Teológico</h1>
+    <div id="nameForm">
+        <label for="name">Qual é o seu nome?</label>
+        <input type="text" id="name" name="name">
+        <button onclick="startQuiz()">Iniciar Quiz</button>
+    </div>
 
-    <form id="quizForm" style="display: none;">
-        <!-- Perguntas -->
+    <form id="quizForm" style="display:none;">
         <div class="question">
-            <p>1. Qual é a definição de Teontologia?</p>
-            <input type="radio" name="q1" value="A"> A) O estudo das ações humanas em relação a Deus.<br>
-            <input type="radio" name="q1" value="B"> B) A disciplina teológica que estuda a existência, natureza e obras de Deus.<br>
-            <input type="radio" name="q1" value="C"> C) O estudo das práticas religiosas em diferentes culturas.<br>
-            <input type="radio" name="q1" value="D"> D) A doutrina que foca exclusivamente na igreja e nos seus membros.<br>
+            <p>1. O que significa que Deus é imutável?</p>
+            <input type="radio" name="q1" value="A"> A) Deus muda conforme as circunstâncias.<br>
+            <input type="radio" name="q1" value="B"> B) Deus não muda em Sua essência, propósito e caráter.<br>
+            <input type="radio" name="q1" value="C"> C) Deus muda de acordo com as orações dos seres humanos.<br>
+            <input type="radio" name="q1" value="D"> D) Deus muda com o passar do tempo.<br>
         </div>
 
         <div class="question">
-            <p>2. Quais são as palavras gregas que compõem o termo Teontologia?</p>
-            <input type="radio" name="q2" value="A"> A) Theo, Ontos, Logos<br>
-            <input type="radio" name="q2" value="B"> B) Theo, Pneuma, Sophia<br>
-            <input type="radio" name="q2" value="C"> C) Theo, Cosmos, Logos<br>
-            <input type="radio" name="q2" value="D"> D) Ontos, Sophia, Ethos<br>
+            <p>2. O que é a onipresença de Deus?</p>
+            <input type="radio" name="q2" value="A"> A) Deus está presente em todos os lugares ao mesmo tempo.<br>
+            <input type="radio" name="q2" value="B"> B) Deus está presente apenas em determinados lugares sagrados.<br>
+            <input type="radio" name="q2" value="C"> C) Deus está presente apenas nas igrejas.<br>
+            <input type="radio" name="q2" value="D"> D) Deus não está presente em nenhum lugar específico.<br>
         </div>
 
         <div class="question">
-            <p>3. Por que a Teontologia é importante para a vida cristã?</p>
-            <input type="radio" name="q3" value="A"> A) Apenas como um exercício acadêmico.<br>
-            <input type="radio" name="q3" value="B"> B) Para compreender e viver de acordo com os atributos e ações de Deus.<br>
-            <input type="radio" name="q3" value="C"> C) Para estudar a Bíblia e os textos históricos.<br>
-            <input type="radio" name="q3" value="D"> D) Para desenvolver ética social e cultural.<br>
+            <p>3. O que significa que Deus é onisciente?</p>
+            <input type="radio" name="q3" value="A"> A) Deus sabe algumas coisas, mas não tudo.<br>
+            <input type="radio" name="q3" value="B"> B) Deus sabe tudo, inclusive o futuro.<br>
+            <input type="radio" name="q3" value="C"> C) Deus sabe apenas o que as pessoas lhe dizem.<br>
+            <input type="radio" name="q3" value="D"> D) Deus só sabe o que acontece em Seu reino.<br>
         </div>
 
         <div class="question">
@@ -216,7 +210,7 @@
             var correctAnswers = 0;
             var totalQuestions = 20;
             var formData = new FormData(event.target);
-
+            var resultMessage = "";
             var answers = {
                 q1: "B",
                 q2: "A",
@@ -241,12 +235,18 @@
             };
 
             formData.forEach(function(value, key) {
+                var questionElement = document.querySelector(`input[name="${key}"]`).closest('.question');
                 if (answers[key] === value) {
                     correctAnswers++;
+                    questionElement.classList.add('correct');
+                } else {
+                    questionElement.classList.add('incorrect');
                 }
             });
 
-            var resultMessage = "Você acertou " + correctAnswers + " de " + totalQuestions + " perguntas.";
+            var userName = document.getElementById("name").value;
+            resultMessage = userName + ", você acertou " + correctAnswers + " de " + totalQuestions + " perguntas.";
+
             document.getElementById("result").textContent = resultMessage;
         }
     </script>
