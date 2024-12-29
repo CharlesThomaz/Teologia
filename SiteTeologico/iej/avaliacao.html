@@ -23,8 +23,11 @@
             color: blue;
         }
     </style>
+    <!-- Bootstrap CSS (pode ser importado de CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    <!-- Barra de navegação -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Teologia</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,13 +44,18 @@
             </ul>
         </div>
     </nav>
-    <h1>Questionário Teológico</h1>
-    <div id="nameForm">
+
+    <!-- Cabeçalho do Questionário -->
+    <h1 class="text-center mt-4">Questionário Teológico</h1>
+    
+    <!-- Formulário de Nome -->
+    <div id="nameForm" class="text-center">
         <label for="name">Qual é o seu nome?</label>
         <input type="text" id="name" name="name">
-        <button onclick="startQuiz()">Iniciar Quiz</button>
+        <button class="btn btn-primary" onclick="startQuiz()">Iniciar Quiz</button>
     </div>
 
+    <!-- Formulário do Quiz -->
     <form id="quizForm" style="display:none;">
         <div class="question">
             <p>1. O que significa que Deus é imutável?</p>
@@ -169,11 +177,13 @@
             <input type="radio" name="q15" value="D"> D) O sofrimento não tem explicação.<br>
         </div>
 
-        <button type="button" onclick="checkAnswers()">Verificar Respostas</button>
+        <button class="btn btn-success" type="button" onclick="checkAnswers()">Verificar Respostas</button>
     </form>
 
+    <!-- Resultados -->
     <div id="result" class="result" style="display:none;"></div>
 
+    <!-- Scripts -->
     <script>
         function startQuiz() {
             var name = document.getElementById('name').value;
@@ -220,10 +230,14 @@
                 }
             }
 
-            resultHTML += `<p class="correct">Você acertou ${score} de ${totalQuestions} perguntas!</p>`;
+            resultHTML += `<p class="result">Pontuação: ${score} de ${totalQuestions}</p>`;
             document.getElementById('result').innerHTML = resultHTML;
             document.getElementById('result').style.display = 'block';
         }
     </script>
+
+    <!-- Bootstrap JS e jQuery (para funcionalidades da navbar e outros componentes) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
