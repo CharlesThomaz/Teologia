@@ -179,28 +179,29 @@
                     }
                 });
 
-                if (respostaSelecionada === questao.resposta) {
-                    acertos++;
-                    radios.forEach(radio => {
-                        if (radio.value === questao.resposta) {
-                            radio.parentElement.classList.add("correta");
-                        }
-                    });
-                } else {
-                    radios.forEach(radio => {
-                        if (radio.value === questao.resposta) {
-                            radio.parentElement.classList.add("resposta-correta");
-                        } else if (radio.checked) {
-                            radio.parentElement.classList.add("resposta-errada");
-                        }
-                    });
-                }
+                // Verifica se a resposta está correta
+                const questaoElement = document.querySelectorAll(`.questao`)[index];
+                const alternativas = questaoElement.querySelectorAll('label');
+                alternativas.forEach((alternativa, i) => {
+                    if (String.fromCharCode(65 + i) === questao.resposta) {
+                        alternativa.classList.add("correta");
+                    } else {
+                        alternativa.classList.add("errada");
+                    }
+
+                    if (respostaSelecionada === questao.resposta) {
+                        acertos++;
+                    }
+                });
             });
 
-            document.getElementById("formulario").style.display = "none";
-            document.getElementById("resultado").style.display = "block";
+            // Mostra o nome e a quantidade de acertos
             document.getElementById("nomeResultado").textContent = `Aluno: ${nome}`;
             document.getElementById("acertosResultado").textContent = `Acertos: ${acertos} de ${questoes.length}`;
+
+            // Exibe o resultado
+            document.getElementById("resultado").style.display = "block";
+            document.getElementById("formulario").style.display = "none";
         }
 
         // Gerar questões ao carregar a página
