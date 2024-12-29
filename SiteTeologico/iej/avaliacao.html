@@ -134,29 +134,13 @@
             <input type="radio" name="q13" value="A"> A) O universo não precisa de uma causa.<br>
             <input type="radio" name="q13" value="B"> B) O universo é eterno.<br>
             <input type="radio" name="q13" value="C"> C) O universo teve um começo e precisa de uma causa.<br>
-            <input type="radio" name="q13" value="D"> D) O universo é uma ilusão.<br>
-        </div>
-
-        <div class="question">
-            <p>14. Como o pecado afetou a humanidade segundo a Bíblia?</p>
-            <input type="radio" name="q14" value="A"> A) O pecado não tem impacto significativo.<br>
-            <input type="radio" name="q14" value="B"> B) O pecado separou a humanidade de Deus.<br>
-            <input type="radio" name="q14" value="C"> C) O pecado é apenas um conceito filosófico.<br>
-            <input type="radio" name="q14" value="D"> D) O pecado foi resolvido sem a necessidade de salvação.<br>
-        </div>
-
-        <div class="question">
-            <p>15. Qual é a relação entre Deus e o sofrimento humano?</p>
-            <input type="radio" name="q15" value="A"> A) Deus causa todo o sofrimento.<br>
-            <input type="radio" name="q15" value="B"> B) O sofrimento é uma consequência do pecado humano.<br>
-            <input type="radio" name="q15" value="C"> C) Deus não se importa com o sofrimento humano.<br>
-            <input type="radio" name="q15" value="D"> D) O sofrimento não tem explicação.<br>
+            <input type="radio" name="q13" value="D"> D) O universo existe por acaso.<br>
         </div>
 
         <button type="button" onclick="checkAnswers()">Verificar Respostas</button>
     </form>
 
-    <div id="result" class="result" style="display:none;"></div>
+    <div class="result" id="result"></div>
 
     <script>
         function startQuiz() {
@@ -165,11 +149,13 @@
                 document.getElementById('nameForm').style.display = 'none';
                 document.getElementById('quizForm').style.display = 'block';
             } else {
-                alert('Por favor, insira seu nome.');
+                alert("Por favor, insira seu nome!");
             }
         }
 
         function checkAnswers() {
+            var score = 0;
+            var totalQuestions = 13;
             var correctAnswers = {
                 q1: 'B',
                 q2: 'A',
@@ -183,30 +169,33 @@
                 q10: 'B',
                 q11: 'A',
                 q12: 'B',
-                q13: 'C',
-                q14: 'B',
-                q15: 'B'
+                q13: 'C'
+            };
+            var userAnswers = {
+                q1: document.querySelector('input[name="q1"]:checked'),
+                q2: document.querySelector('input[name="q2"]:checked'),
+                q3: document.querySelector('input[name="q3"]:checked'),
+                q4: document.querySelector('input[name="q4"]:checked'),
+                q5: document.querySelector('input[name="q5"]:checked'),
+                q6: document.querySelector('input[name="q6"]:checked'),
+                q7: document.querySelector('input[name="q7"]:checked'),
+                q8: document.querySelector('input[name="q8"]:checked'),
+                q9: document.querySelector('input[name="q9"]:checked'),
+                q10: document.querySelector('input[name="q10"]:checked'),
+                q11: document.querySelector('input[name="q11"]:checked'),
+                q12: document.querySelector('input[name="q12"]:checked'),
+                q13: document.querySelector('input[name="q13"]:checked')
             };
 
-            var form = document.forms[0];
-            var score = 0;
-            var totalQuestions = 15;
-            var resultHTML = '';
-            
-            for (var i = 1; i <= totalQuestions; i++) {
-                var question = form['q' + i];
-                var selectedAnswer = question.value;
-                if (selectedAnswer === correctAnswers['q' + i]) {
+            for (var question in userAnswers) {
+                if (userAnswers[question] && userAnswers[question].value === correctAnswers[question]) {
                     score++;
-                    resultHTML += `<p class="correct">Pergunta ${i}: Resposta correta!</p>`;
-                } else {
-                    resultHTML += `<p class="incorrect">Pergunta ${i}: Resposta incorreta. Resposta correta: ${correctAnswers['q' + i]}</p>`;
                 }
             }
 
-            resultHTML += `<p class="correct">Você acertou ${score} de ${totalQuestions} perguntas!</p>`;
-            document.getElementById('result').innerHTML = resultHTML;
-            document.getElementById('result').style.display = 'block';
+            var result = document.getElementById('result');
+            result.innerHTML = "Você acertou " + score + " de " + totalQuestions + " questões.";
+            result.style.color = score >= (totalQuestions / 2) ? 'green' : 'red';
         }
     </script>
 </body>
