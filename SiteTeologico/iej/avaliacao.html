@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avaliação de Teontologia</title>
+    <title>Quiz de Teontologia</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -33,7 +33,7 @@
         <button type="button" onclick="startQuiz()">Iniciar Quiz</button>
     </form>
 
-    <form id="quizForm" style="display: none;">
+    <form id="quizForm" style="display: none;" onsubmit="return checkAnswers();">
         <!-- Perguntas -->
         <div class="question">
             <p>1. Qual é a definição de Teontologia?</p>
@@ -195,31 +195,17 @@
             <input type="radio" name="q20" value="D"> D) Deus depende do conhecimento humano para saber sobre o mundo.<br>
         </div>
 
-        <button type="submit">Enviar Respostas</button>
+        <button type="submit">Verificar Respostas</button>
     </form>
 
-    <div id="result" class="result"></div>
+    <div id="result" class="result" style="display:none;">
+        <p id="resultMessage"></p>
+    </div>
 
     <script>
-        function startQuiz() {
-            var name = document.getElementById("name").value;
-            if (name) {
-                document.getElementById("nameForm").style.display = "none";
-                document.getElementById("quizForm").style.display = "block";
-            } else {
-                alert("Por favor, insira seu nome para iniciar.");
-            }
-        }
-
-        document.getElementById("quizForm").onsubmit = function(event) {
-            event.preventDefault();
-            var correctAnswers = 0;
-            var totalQuestions = 20;
-            var formData = new FormData(event.target);
-
-            var answers = {
-                q1: "B",
-                q2: "A",
+        const correctAnswers = {
+            q1: 'B',
+            q2: 'A',
                 q3: "B",
                 q4: "C",
                 q5: "B",
@@ -240,14 +226,36 @@
                 q20: "B"
             };
 
-            formData.forEach(function(value, key) {
-                if (answers[key] === value) {
-                    correctAnswers++;
-                }
-            });
+            function startQuiz() {
+            document.getElementById('nameForm').style.display = 'none';
+            document.getElementById('quizForm').style.display = 'block';
+        }
 
-            var resultMessage = "Você acertou " + correctAnswers + " de " + totalQuestions + " perguntas.";
-            document.getElementById("result").textContent = resultMessage;
+        function checkAnswers() {
+            let score = 0;
+            const formElements = document.forms["quizForm"].elements;
+            let resultMessage = 'Respostas corretas:<br>';
+            
+            for (let i = 1; i <= 2; i++) { // Aqui está o range de perguntas (q1 a q2, adicione conforme necessário)
+                const questionName = "q" + i;
+                const selectedAnswer = formElements[questionName].value;
+                const correctAnswer = correctAnswers[questionName];
+                const question = document.querySelector(`.question:nth-child(${i})`);
+                
+                // Verificar se a resposta está correta
+                if (selectedAnswer === correctAnswer) {
+                    score++;
+                    question.querySelector(`input[value="${selectedAnswer}"]`).classList.add('correct');
+                } else {
+                    question.querySelector(`input[value="${selectedAnswer}"]`).classList.add('incorrect');
+                    question.querySelector(`input[value="${correctAnswer}"]`).classList.add('correct');
+                }
+            }
+
+            resultMessage += `Você acertou ${score} de 2 perguntas.`;
+            document.getElementById('resultMessage').innerHTML = resultMessage;
+            document.getElementById('result').style.display = 'block';
+            return false; // Impede o envio do formulário
         }
     </script>
 </body>
