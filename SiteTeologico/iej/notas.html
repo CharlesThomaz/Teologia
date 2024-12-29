@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Notas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f7f7f7;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Consulta de Notas</h2>
+        <p>Digite o seu nome para verificar as notas:</p>
+        <input type="text" id="nomeAluno" placeholder="Digite o seu nome">
+        <button onclick="verificarNota()">Verificar Notas</button>
+        <div id="resultado" class="result"></div>
+    </div>
+
+    <script>
+        // Objeto contendo as notas dos alunos
+        const notas = {
+            "ANA PAULA MIRANDA DE AZEVEDO": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10, Nota_P4: 10 },
+            "AILTON DIAS TEIXEIRA": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10, Nota_P4: 10 },
+            "CLÁUDIA LEONARDO COSTA": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10, Nota_P4: 10 },
+            "CAMILLE FERNANDES SILVA": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10, Nota_P4: 10 },
+            "CARINE FERNANDES SILVA": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10, Nota_P4: 10 },
+            "CLEONICE VIANA SILVA": { Prolegômenos: 9, Bibliologia: 10, Teontologia: 10, Nota_P4: 10 },
+            "DENIZE ACÁSSIA MAIA DOS SANTOS": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10, Nota_P4: 10 },
+            "GERALDA ALZIRA DE ALMEIDA FERNANDES": { Prolegômenos: 9.5, Bibliologia: 10, Teontologia: 10, Nota_P4: 10 },
+            "PATRICK FLAVIANO MORAIS": { Prolegômenos: 9, Bibliologia: 10, Teontologia: 10, Nota_P4: 9 },
+            "ROSANGELA DE F.V. SILVA": { Prolegômenos: 7, Bibliologia: 10, Teontologia: 10, Nota_P4: 7 }
+        };
+
+        // Função para verificar as notas
+        function verificarNota() {
+            const nome = document.getElementById("nomeAluno").value.trim().toUpperCase();
+            const resultado = document.getElementById("resultado");
+
+            if (notas[nome] !== undefined) {
+                const alunoNotas = notas[nome];
+                let textoNotas = `As notas de ${nome} são:<br>`;
+                for (const [disciplina, nota] of Object.entries(alunoNotas)) {
+                    textoNotas += `${disciplina}: ${nota}<br>`;
+                }
+                resultado.innerHTML = textoNotas;
+            } else {
+                resultado.textContent = `Aluno "${nome}" não encontrado.`;
+            }
+        }
+    </script>
+</body>
+</html>
