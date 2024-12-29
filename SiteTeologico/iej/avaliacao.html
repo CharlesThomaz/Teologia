@@ -18,6 +18,10 @@
         .incorrect {
             color: red;
         }
+        .correct-answer {
+            font-style: italic;
+            color: blue;
+        }
     </style>
 </head>
 <body>
@@ -129,125 +133,80 @@
             <p>13. Como o argumento cosmológico explica a existência de Deus?</p>
             <input type="radio" name="q13" value="A"> A) O universo não precisa de uma causa.<br>
             <input type="radio" name="q13" value="B"> B) O universo é eterno.<br>
-            <input type="radio" name="q13" value="C"> C) Tudo que começa a existir tem uma causa, e Deus é essa causa.<br>
-            <input type="radio" name="q13" value="D"> D) A ciência já explica tudo.<br>
+            <input type="radio" name="q13" value="C"> C) O universo teve um começo e precisa de uma causa.<br>
+            <input type="radio" name="q13" value="D"> D) O universo é uma ilusão.<br>
         </div>
 
         <div class="question">
-            <p>14. O que caracteriza a imutabilidade de Deus?</p>
-            <input type="radio" name="q14" value="A"> A) Deus muda conforme as necessidades humanas.<br>
-            <input type="radio" name="q14" value="B"> B) Deus não muda em Sua essência, propósito e caráter.<br>
-            <input type="radio" name="q14" value="C"> C) Deus evolui com o tempo.<br>
-            <input type="radio" name="q14" value="D"> D) Deus muda conforme os pecados das pessoas.<br>
+            <p>14. Como o pecado afetou a humanidade segundo a Bíblia?</p>
+            <input type="radio" name="q14" value="A"> A) O pecado não tem impacto significativo.<br>
+            <input type="radio" name="q14" value="B"> B) O pecado separou a humanidade de Deus.<br>
+            <input type="radio" name="q14" value="C"> C) O pecado é apenas um conceito filosófico.<br>
+            <input type="radio" name="q14" value="D"> D) O pecado foi resolvido sem a necessidade de salvação.<br>
         </div>
 
         <div class="question">
-            <p>15. O que significa que Deus é onipotente?</p>
-            <input type="radio" name="q15" value="A"> A) Ele tem total poder sobre todas as coisas.<br>
-            <input type="radio" name="q15" value="B"> B) Ele não pode fazer nada.<br>
-            <input type="radio" name="q15" value="C"> C) Ele não pode alterar as leis da natureza.<br>
-            <input type="radio" name="q15" value="D"> D) Ele é fraco diante das dificuldades humanas.<br>
+            <p>15. Qual é a relação entre Deus e o sofrimento humano?</p>
+            <input type="radio" name="q15" value="A"> A) Deus causa todo o sofrimento.<br>
+            <input type="radio" name="q15" value="B"> B) O sofrimento é uma consequência do pecado humano.<br>
+            <input type="radio" name="q15" value="C"> C) Deus não se importa com o sofrimento humano.<br>
+            <input type="radio" name="q15" value="D"> D) O sofrimento não tem explicação.<br>
         </div>
 
-        <div class="question">
-            <p>16. Qual é a relação entre o amor e a justiça de Deus?</p>
-            <input type="radio" name="q16" value="A"> A) São opostos.<br>
-            <input type="radio" name="q16" value="B"> B) O amor de Deus anula Sua justiça.<br>
-            <input type="radio" name="q16" value="C"> C) A justiça de Deus é expressada através do Seu amor.<br>
-            <input type="radio" name="q16" value="D"> D) A justiça de Deus é um amor rígido.<br>
-        </div>
-
-        <div class="question">
-            <p>17. Como Deus demonstra Sua bondade segundo as Escrituras?</p>
-            <input type="radio" name="q17" value="A"> A) Sendo indiferente ao sofrimento humano.<br>
-            <input type="radio" name="q17" value="B"> B) Castigando os pecadores.<br>
-            <input type="radio" name="q17" value="C"> C) Demonstrando misericórdia e graça para com os que erram.<br>
-            <input type="radio" name="q17" value="D"> D) Ignorando os problemas do mundo.<br>
-        </div>
-
-        <div class="question">
-            <p>18. O que significa a criação ex nihilo?</p>
-            <input type="radio" name="q18" value="A"> A) Criação do nada.<br>
-            <input type="radio" name="q18" value="B"> B) Criação do caos.<br>
-            <input type="radio" name="q18" value="C"> C) Criação a partir de algo pré-existente.<br>
-            <input type="radio" name="q18" value="D"> D) Criação do universo a partir de uma divindade superior.<br>
-        </div>
-
-        <div class="question">
-            <p>19. O que significa que Deus é eterno?</p>
-            <input type="radio" name="q19" value="A"> A) Ele existe fora do tempo e não tem começo nem fim.<br>
-            <input type="radio" name="q19" value="B"> B) Ele está limitado ao tempo.<br>
-            <input type="radio" name="q19" value="C"> C) Ele existe apenas no momento presente.<br>
-            <input type="radio" name="q19" value="D"> D) Ele nasceu no princípio do tempo.<br>
-        </div>
-
-        <div class="question">
-            <p>20. O que é a onisciência de Deus?</p>
-            <input type="radio" name="q20" value="A"> A) Deus sabe tudo, mas escolhe não saber algumas coisas.<br>
-            <input type="radio" name="q20" value="B"> B) Deus sabe tudo, até o futuro.<br>
-            <input type="radio" name="q20" value="C"> C) Deus tem conhecimento limitado.<br>
-            <input type="radio" name="q20" value="D"> D) Deus depende do conhecimento humano para saber sobre o mundo.<br>
-        </div>
-
-        <button type="submit">Enviar Respostas</button>
+        <button type="button" onclick="checkAnswers()">Verificar Respostas</button>
     </form>
 
-    <div id="result" class="result"></div>
+    <div id="result" class="result" style="display:none;"></div>
 
     <script>
         function startQuiz() {
-            var name = document.getElementById("name").value;
+            var name = document.getElementById('name').value;
             if (name) {
-                document.getElementById("nameForm").style.display = "none";
-                document.getElementById("quizForm").style.display = "block";
+                document.getElementById('nameForm').style.display = 'none';
+                document.getElementById('quizForm').style.display = 'block';
             } else {
-                alert("Por favor, insira seu nome para iniciar.");
+                alert('Por favor, insira seu nome.');
             }
         }
 
-        document.getElementById("quizForm").onsubmit = function(event) {
-            event.preventDefault();
-            var correctAnswers = 0;
-            var totalQuestions = 20;
-            var formData = new FormData(event.target);
-            var resultMessage = "";
-            var answers = {
-                q1: "B",
-                q2: "A",
-                q3: "B",
-                q4: "C",
-                q5: "B",
-                q6: "C",
-                q7: "C",
-                q8: "B",
-                q9: "C",
-                q10: "B",
-                q11: "A",
-                q12: "B",
-                q13: "C",
-                q14: "B",
-                q15: "A",
-                q16: "C",
-                q17: "C",
-                q18: "A",
-                q19: "A",
-                q20: "B"
+        function checkAnswers() {
+            var correctAnswers = {
+                q1: 'B',
+                q2: 'A',
+                q3: 'B',
+                q4: 'C',
+                q5: 'B',
+                q6: 'C',
+                q7: 'C',
+                q8: 'B',
+                q9: 'C',
+                q10: 'B',
+                q11: 'A',
+                q12: 'B',
+                q13: 'C',
+                q14: 'B',
+                q15: 'B'
             };
 
-            formData.forEach(function(value, key) {
-                var questionElement = document.querySelector(`input[name="${key}"]`).closest('.question');
-                if (answers[key] === value) {
-                    correctAnswers++;
-                    questionElement.classList.add('correct');
+            var form = document.forms[0];
+            var score = 0;
+            var totalQuestions = 15;
+            var resultHTML = '';
+            
+            for (var i = 1; i <= totalQuestions; i++) {
+                var question = form['q' + i];
+                var selectedAnswer = question.value;
+                if (selectedAnswer === correctAnswers['q' + i]) {
+                    score++;
+                    resultHTML += `<p class="correct">Pergunta ${i}: Resposta correta!</p>`;
                 } else {
-                    questionElement.classList.add('incorrect');
+                    resultHTML += `<p class="incorrect">Pergunta ${i}: Resposta incorreta. Resposta correta: ${correctAnswers['q' + i]}</p>`;
                 }
-            });
+            }
 
-            var userName = document.getElementById("name").value;
-            resultMessage = userName + ", você acertou " + correctAnswers + " de " + totalQuestions + " perguntas.";
-
-            document.getElementById("result").textContent = resultMessage;
+            resultHTML += `<p class="correct">Você acertou ${score} de ${totalQuestions} perguntas!</p>`;
+            document.getElementById('result').innerHTML = resultHTML;
+            document.getElementById('result').style.display = 'block';
         }
     </script>
 </body>
