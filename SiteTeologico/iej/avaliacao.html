@@ -1,228 +1,130 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questionário Teológico</title>
+    <title>Consulta de Notas</title>
     <style>
-        .question {
-            margin-bottom: 15px;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f7f7f7;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
         }
         .result {
             margin-top: 20px;
-            font-weight: bold;
-        }
-        .correct {
-            color: green;
-        }
-        .incorrect {
-            color: red;
-        }
-        .correct-answer {
-            font-style: italic;
-            color: blue;
+            font-size: 1.2em;
+            color: #333;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Teologia</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Início</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contato.html">Contato</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <h1>Questionário Teológico</h1>
-    <div id="nameForm">
-        <label for="name">Qual é o seu nome?</label>
-        <input type="text" id="name" name="name">
-        <button onclick="startQuiz()">Iniciar Quiz</button>
+    <div class="container">
+        <h2>Consulta de Notas</h2>
+        <p>Digite o nome ou parte do nome para verificar as notas:</p>
+        <input type="text" id="nomeAluno" placeholder="Digite o nome do aluno">
+        <button onclick="verificarNota()">Verificar Notas</button>
+        <div id="resultado" class="result"></div>
     </div>
 
-    <form id="quizForm" style="display:none;">
-        <div class="question">
-            <p>1. O que significa que Deus é imutável?</p>
-            <input type="radio" name="q1" value="A"> A) Deus muda conforme as circunstâncias.<br>
-            <input type="radio" name="q1" value="B"> B) Deus não muda em Sua essência, propósito e caráter.<br>
-            <input type="radio" name="q1" value="C"> C) Deus muda de acordo com as orações dos seres humanos.<br>
-            <input type="radio" name="q1" value="D"> D) Deus muda com o passar do tempo.<br>
-        </div>
-
-        <div class="question">
-            <p>2. O que é a onipresença de Deus?</p>
-            <input type="radio" name="q2" value="A"> A) Deus está presente em todos os lugares ao mesmo tempo.<br>
-            <input type="radio" name="q2" value="B"> B) Deus está presente apenas em determinados lugares sagrados.<br>
-            <input type="radio" name="q2" value="C"> C) Deus está presente apenas nas igrejas.<br>
-            <input type="radio" name="q2" value="D"> D) Deus não está presente em nenhum lugar específico.<br>
-        </div>
-
-        <div class="question">
-            <p>3. O que significa que Deus é onisciente?</p>
-            <input type="radio" name="q3" value="A"> A) Deus sabe algumas coisas, mas não tudo.<br>
-            <input type="radio" name="q3" value="B"> B) Deus sabe tudo, inclusive o futuro.<br>
-            <input type="radio" name="q3" value="C"> C) Deus sabe apenas o que as pessoas lhe dizem.<br>
-            <input type="radio" name="q3" value="D"> D) Deus só sabe o que acontece em Seu reino.<br>
-        </div>
-
-        <div class="question">
-            <p>4. Qual dos argumentos filosóficos afirma que o universo apresenta ordem e complexidade que indicam um designer inteligente?</p>
-            <input type="radio" name="q4" value="A"> A) Argumento Ontológico<br>
-            <input type="radio" name="q4" value="B"> B) Argumento Cosmológico<br>
-            <input type="radio" name="q4" value="C"> C) Argumento Teleológico<br>
-            <input type="radio" name="q4" value="D"> D) Argumento Moral<br>
-        </div>
-
-        <div class="question">
-            <p>5. O que significa o amor ágape na Bíblia?</p>
-            <input type="radio" name="q5" value="A"> A) Amor romântico e físico.<br>
-            <input type="radio" name="q5" value="B"> B) Amor incondicional e sacrificial.<br>
-            <input type="radio" name="q5" value="C"> C) Amor entre amigos e companheiros.<br>
-            <input type="radio" name="q5" value="D"> D) Amor natural entre pais e filhos.<br>
-        </div>
-
-        <div class="question">
-            <p>6. O que diferencia o amor fileo?</p>
-            <input type="radio" name="q6" value="A"> A) É um amor entre pais e filhos.<br>
-            <input type="radio" name="q6" value="B"> B) É um amor romântico e sensual.<br>
-            <input type="radio" name="q6" value="C"> C) É um amor entre amigos e baseado em respeito mútuo.<br>
-            <input type="radio" name="q6" value="D"> D) É um amor incondicional.<br>
-        </div>
-
-        <div class="question">
-            <p>7. Qual é a principal característica do amor eros?</p>
-            <input type="radio" name="q7" value="A"> A) Amor espiritual.<br>
-            <input type="radio" name="q7" value="B"> B) Amor familiar.<br>
-            <input type="radio" name="q7" value="C"> C) Amor romântico e físico.<br>
-            <input type="radio" name="q7" value="D"> D) Amor sacrificial.<br>
-        </div>
-
-        <div class="question">
-            <p>8. O que significa o argumento moral?</p>
-            <input type="radio" name="q8" value="A"> A) A moralidade pode ser explicada apenas pela biologia humana.<br>
-            <input type="radio" name="q8" value="B"> B) A existência de normas morais universais aponta para a existência de Deus.<br>
-            <input type="radio" name="q8" value="C"> C) A moralidade é relativa e não exige uma divindade.<br>
-            <input type="radio" name="q8" value="D"> D) A ética é suficiente para estabelecer padrões morais.<br>
-        </div>
-
-        <div class="question">
-            <p>9. Quais são os dois tipos principais de atributos de Deus?</p>
-            <input type="radio" name="q9" value="A"> A) Morais e não morais.<br>
-            <input type="radio" name="q9" value="B"> B) Visíveis e invisíveis.<br>
-            <input type="radio" name="q9" value="C"> C) Comunicáveis e incomunicáveis.<br>
-            <input type="radio" name="q9" value="D"> D) Eternos e temporais.<br>
-        </div>
-
-        <div class="question">
-            <p>10. Como a justiça de Deus é descrita em Isaías 61:8?</p>
-            <input type="radio" name="q10" value="A"> A) Ele abençoa todos igualmente.<br>
-            <input type="radio" name="q10" value="B"> B) Ele ama a justiça e aborrece a injustiça.<br>
-            <input type="radio" name="q10" value="C"> C) Ele ignora o roubo e a opressão.<br>
-            <input type="radio" name="q10" value="D"> D) Ele pune sem misericórdia.<br>
-        </div>
-
-        <div class="question">
-            <p>11. O que significa buscar o Reino de Deus e Sua justiça?</p>
-            <input type="radio" name="q11" value="A"> A) Priorizar os princípios divinos sobre as necessidades terrenas.<br>
-            <input type="radio" name="q11" value="B"> B) Obter riquezas materiais como sinal de bênção.<br>
-            <input type="radio" name="q11" value="C"> C) Viver sem se preocupar com regras.<br>
-            <input type="radio" name="q11" value="D"> D) Submeter-se à autoridade humana.<br>
-        </div>
-
-        <div class="question">
-            <p>12. Qual é a base para a eternidade de Deus em Salmo 90:2?</p>
-            <input type="radio" name="q12" value="A"> A) Deus foi criado antes de todas as coisas.<br>
-            <input type="radio" name="q12" value="B"> B) Deus existe de eternidade a eternidade.<br>
-            <input type="radio" name="q12" value="C"> C) Deus é limitado pelo tempo.<br>
-            <input type="radio" name="q12" value="D"> D) Deus não tem controle sobre o tempo.<br>
-        </div>
-
-        <div class="question">
-            <p>13. Como o argumento cosmológico explica a existência de Deus?</p>
-            <input type="radio" name="q13" value="A"> A) O universo não precisa de uma causa.<br>
-            <input type="radio" name="q13" value="B"> B) O universo é eterno.<br>
-            <input type="radio" name="q13" value="C"> C) O universo teve um começo e precisa de uma causa.<br>
-            <input type="radio" name="q13" value="D"> D) O universo é uma ilusão.<br>
-        </div>
-
-        <div class="question">
-            <p>14. Como o pecado afetou a humanidade segundo a Bíblia?</p>
-            <input type="radio" name="q14" value="A"> A) O pecado não tem impacto significativo.<br>
-            <input type="radio" name="q14" value="B"> B) O pecado separou a humanidade de Deus.<br>
-            <input type="radio" name="q14" value="C"> C) O pecado é apenas um conceito filosófico.<br>
-            <input type="radio" name="q14" value="D"> D) O pecado foi resolvido sem a necessidade de salvação.<br>
-        </div>
-
-        <div class="question">
-            <p>15. Qual é a relação entre Deus e o sofrimento humano?</p>
-            <input type="radio" name="q15" value="A"> A) Deus causa todo o sofrimento.<br>
-            <input type="radio" name="q15" value="B"> B) O sofrimento é uma consequência do pecado humano.<br>
-            <input type="radio" name="q15" value="C"> C) Deus não se importa com o sofrimento humano.<br>
-            <input type="radio" name="q15" value="D"> D) O sofrimento não tem explicação.<br>
-        </div>
-
-        <button type="button" onclick="checkAnswers()">Verificar Respostas</button>
-    </form>
-
-    <div id="result" class="result" style="display:none;"></div>
-
     <script>
-        function startQuiz() {
-            var name = document.getElementById('name').value;
-            if (name) {
-                document.getElementById('nameForm').style.display = 'none';
-                document.getElementById('quizForm').style.display = 'block';
-            } else {
-                alert('Por favor, insira seu nome.');
-            }
-        }
+        const notas = {
+            "ANA PAULA MIRANDA DE AZEVEDO": { Prolegômenos: 10, Bibliologia: 10 },
+            "AILTON DIAS TEIXEIRA": { Prolegômenos: 10, Bibliologia: 10 },
+            "ALBERTO GERALDO PIRES MIRANDA JUNIOR": {},
+            "CAMILA APARECIDA VELOSO": {},
+            "CLÁUDIA LEONARDO COSTA": { Prolegômenos: 10, Bibliologia: 10 },
+            "CAMILLE FERNANDES SILVA": { Prolegômenos: 10, Bibliologia: 10 },
+            "CARINE FERNANDES SILVA": { Prolegômenos: 10, Bibliologia: 10 },
+            "CÁSSIO MURILO DE OLIVEIRA": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 },
+            "CLEBER ANTÔNIO ABREU": { Prolegômenos: 10, Bibliologia: 10 },
+            "CLEONICE VIANA SILVA": { Prolegômenos: 9, Bibliologia: 10 },
+            "DANIEL RODRIGUES NUNES": {},
+            "DEIVISSON PITTA LOUREDO": {},
+            "JEDSON": { Bibliologia: 10 },
+            "JEFFERSON": { Bibliologia: 10, Teontologia: 9.3 },
+            "DENIZE ACÁSSIA MAIA DOS SANTOS": { Prolegômenos: 10, Bibliologia: 10 },
+            "ÉRICA GERALDA OTONI": { Prolegômenos: 10 },
+            "FÁBIO DIAS TEIXEIRA": { Prolegômenos: 10, Bibliologia: 10 },
+            "FILEMON ANDRÉ DOS SANTOS": { Prolegômenos: 9, Bibliologia: 10 },
+            "GABRIEL GUILHERME DE PAULA": { Prolegômenos: 10, Bibliologia: 10 },
+            "CRISTINA": { Bibliologia: 10 },
+            "GERALDA ALZIRA DE ALMEIDA FERNANDES": { Prolegômenos: 9.5, Bibliologia: 10 },
+            "GELSON PEREIRA": { Prolegômenos: 10, Bibliologia: 10 },
+            "GERALDO CRISTIANO MARTINS F. XAVIER": { Prolegômenos: 10, Bibliologia: 10 },
+            "ISAÍAS VIANA TEXEIRA": { Prolegômenos: 10, Bibliologia: 10 },
+            "ISMAEL VIANA TEIXEIRA": { Prolegômenos: 10, Bibliologia: 10 },
+            "JOÃO PAULO BERALDO DA SILVA": { Prolegômenos: 10, Bibliologia: 10 },
+            "JOSÉ ARMANDO ALVES": { Prolegômenos: 10, Bibliologia: 10 },
+            "JESSÉ ITALLO DE LIMA SOUZA": { Prolegômenos: 10, Bibliologia: 10 },
+            "JÚLIO CÉSAR PRADO": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 },
+            "LUIZ ANTONIO PRUDENCINI": { Prolegômenos: 10 },
+            "LUIS HENRIQUE ARAÚJO RUAS": { Prolegômenos: 10, Bibliologia: 10 },
+            "MARCOS GABRIEL TOMAZ MOREIRA": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 },
+            "MARIA JÚLIA DIAS TEIXEIRA": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 },
+            "MARIA JULIANA ALVES LESSA": { Prolegômenos: 10, Bibliologia: 10 },
+            "PATRICK FLAVIANO MORAIS": { Prolegômenos: 9 },
+            "POLLYANA SANTIAGO RODRIGUES SILVA MIRANDA": { Prolegômenos: 10, Bibliologia: 10 },
+            "ROSANGELA DE F.V. SILVA": { Prolegômenos: 7 },
+            "SELMINHA DA PENHA FRANCO": { Prolegômenos: 10, Bibliologia: 10 },
+            "STEPHANIE LUIZA GUIMARÃES BRAGA": { Prolegômenos: 10, Bibliologia: 10 },
+            "VÂNDILSON ANTÔNIO SILVA": { Prolegômenos: 10, Bibliologia: 10 },
+            "VANDERLEY CARVALHO LESSA": { Prolegômenos: 10, Bibliologia: 10 },
+            "MOISES": { Bibliologia: 10 },
+            "WARLEY BARBOSA DOS SANTOS LOPES": { Prolegômenos: 10, Bibliologia: 10 },
+            "SALETE RIBEIRO DE SOUZA PEÇANHA DA CRUZ": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 }
+        };
 
-        function checkAnswers() {
-            var correctAnswers = {
-                q1: 'B',
-                q2: 'A',
-                q3: 'B',
-                q4: 'C',
-                q5: 'B',
-                q6: 'C',
-                q7: 'C',
-                q8: 'B',
-                q9: 'C',
-                q10: 'B',
-                q11: 'A',
-                q12: 'B',
-                q13: 'C',
-                q14: 'B',
-                q15: 'B'
-            };
+        function verificarNota() {
+            const nome = document.getElementById("nomeAluno").value.trim().toUpperCase();
+            const resultado = document.getElementById("resultado");
+            const resultadosEncontrados = [];
 
-            var form = document.forms[0];
-            var score = 0;
-            var totalQuestions = 15;
-            var resultHTML = '';
-            
-            for (var i = 1; i <= totalQuestions; i++) {
-                var question = form['q' + i];
-                var selectedAnswer = question.value;
-                if (selectedAnswer === correctAnswers['q' + i]) {
-                    score++;
-                    resultHTML += `<p class="correct">Pergunta ${i}: Resposta correta!</p>`;
-                } else {
-                    resultHTML += `<p class="incorrect">Pergunta ${i}: Resposta incorreta. Resposta correta: ${correctAnswers['q' + i]}</p>`;
+            for (const [nomeCompleto, disciplinas] of Object.entries(notas)) {
+                if (nomeCompleto.includes(nome)) {
+                    let textoNotas = `<strong>${nomeCompleto}</strong>:<br>`;
+                    let encontrouNota = false;
+                    for (const [disciplina, nota] of Object.entries(disciplinas)) {
+                        if (nota != null && nota !== "") {
+                            textoNotas += `- ${disciplina}: ${nota}<br>`;
+                            encontrouNota = true;
+                        }
+                    }
+                    if (encontrouNota) {
+                        resultadosEncontrados.push(textoNotas);
+                    }
                 }
             }
 
-            resultHTML += `<p class="correct">Você acertou ${score} de ${totalQuestions} perguntas!</p>`;
-            document.getElementById('result').innerHTML = resultHTML;
-            document.getElementById('result').style.display = 'block';
+            if (resultadosEncontrados.length > 0) {
+                resultado.innerHTML = resultadosEncontrados.join("<hr>");
+            } else {
+                resultado.textContent = `Nenhum aluno encontrado com "${nome}".`;
+            }
         }
     </script>
 </body>
