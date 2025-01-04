@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Notas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f7f7f7;
+        }
+        .navbar {
+            background-color: #007bff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .navbar a:hover {
+            background-color: #0056b3;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Início</a>
+        <a href="contato.html">Contatos</a>
+    </div>
+
+    <div class="container">
+        <h2>Consulta de Notas</h2>
+        <p>Digite o nome ou parte do nome para verificar as notas:</p>
+        <input type="text" id="nomeAluno" placeholder="Digite o nome do aluno">
+        <button onclick="verificarNota()">Verificar Notas</button>
+        <div id="resultado" class="result"></div>
+    </div>
+
+    <script>
+        const notas = {
+            "ANA PAULA MIRANDA DE AZEVEDO": { Prolegômenos: 10, Bibliologia: 10 },
+            "AILTON DIAS TEIXEIRA": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 },
+            "ALBERTO GERALDO PIRES MIRANDA JUNIOR": {},
+            "CAMILA APARECIDA VELOSO": {},
+            "CLÁUDIA LEONARDO COSTA": { Prolegômenos: 10, Bibliologia: 10,Teontologia: 9.3 },
+            "CAMILLE FERNANDES SILVA": { Prolegômenos: 10, Bibliologia: 10,Teontologia: 9.3 },
+            "CARINE FERNANDES SILVA": { Prolegômenos: 10, Bibliologia: 10, Teontologia: },
+            "CÁSSIO MURILO DE OLIVEIRA": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 },
+            "CLEBER ANTÔNIO ABREU": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 },
+            "CLEONICE VIANA SILVA": { Prolegômenos: 9, Bibliologia: 10 },
+            "DANIEL RODRIGUES NUNES": {},
+            "DEIVISSON PITTA LOUREDO": {},
+            "JEDSON": { Bibliologia: 10, Teontologia: 9.3 },
+            "JEFFERSON": { Bibliologia: 10, Teontologia: 9.3 },
+            "DENIZE ACÁSSIA MAIA DOS SANTOS": { Prolegômenos: 10, Bibliologia: 10, Teontologia: },
+            "ÉRICA GERALDA OTONI": { Prolegômenos: 10 },
+            "FÁBIO DIAS TEIXEIRA": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 },
+            "FILEMON ANDRÉ DOS SANTOS": { Prolegômenos: 9, Bibliologia: 10, Teontologia: 10 },
+            "GABRIEL GUILHERME DE PAULA": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10  },
+            "CRISTINA": { Bibliologia: 10, Teontologia: 10  },
+            "GERALDA ALZIRA DE ALMEIDA FERNANDES": { Prolegômenos: 9.5, Bibliologia: 10, Teontologia:10 },
+            "GELSON PEREIRA": { Prolegômenos: 10, Bibliologia: 10 },
+            "GERALDO CRISTIANO MARTINS F. XAVIER": { Prolegômenos: 10, Bibliologia: 10 },
+            "ISAÍAS VIANA TEXEIRA": { Prolegômenos: 10, Bibliologia: 10 },
+            "ISMAEL VIANA TEIXEIRA": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10  },
+            "JOÃO PAULO BERALDO DA SILVA": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 },
+            "JOSÉ ARMANDO ALVES": { Prolegômenos: 10, Bibliologia: 10 },
+            "JESSÉ ITALLO DE LIMA SOUZA": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 9.3 },
+            "JÚLIO CÉSAR PRADO": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 },
+            "LUIZ ANTONIO PRUDENCINI": { Prolegômenos: 10 },
+            "LUIS HENRIQUE ARAÚJO RUAS": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10  },
+            "MARCOS GABRIEL TOMAZ MOREIRA": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 },
+            "MARIA JÚLIA DIAS TEIXEIRA": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 },
+            "MARIA JULIANA ALVES LESSA": { Prolegômenos: 10, Bibliologia: 10 },
+            "PATRICK FLAVIANO MORAIS": { Prolegômenos: 9 },
+            "POLLYANA SANTIAGO RODRIGUES SILVA MIRANDA": { Prolegômenos: 10, Bibliologia: 10 },
+            "ROSANGELA DE F.V. SILVA": { Prolegômenos: 7, Teontologia: 10 },
+            "SELMINHA DA PENHA FRANCO": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 },
+            "STEPHANIE LUIZA GUIMARÃES BRAGA": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 },
+            "VÂNDILSON ANTÔNIO SILVA": { Prolegômenos: 10, Bibliologia: 10 },
+            "VANDERLEY CARVALHO LESSA": { Prolegômenos: 10, Bibliologia: 10 },
+            "MOISES": { Bibliologia: 10, Teontologia: 10  },
+            "WARLEY BARBOSA DOS SANTOS LOPES": { Prolegômenos: 10, Bibliologia: 10, Teontologia:9.3 },
+            "SALETE RIBEIRO DE SOUZA PEÇANHA DA CRUZ": { Prolegômenos: 10, Bibliologia: 10, Teontologia: 10 }
+        };
+
+        function removerAcentos(str) {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+function verificarNota() {
+    const nome = removerAcentos(document.getElementById("nomeAluno").value.trim().toUpperCase());
+    const resultado = document.getElementById("resultado");
+    const resultadosEncontrados = [];
+
+    // Verificar se o nome não é nulo ou vazio
+    if (!nome) {
+        resultado.textContent = "Por favor, digite um nome válido.";
+        return;
+    }
+
+    for (const [nomeCompleto, disciplinas] of Object.entries(notas)) {
+        const nomeNormalizado = removerAcentos(nomeCompleto.toUpperCase());
+
+        // Verificar se o nome contém o nome digitado, ignorando acentos
+        if (nomeNormalizado.includes(nome)) {
+            let textoNotas = `<strong>${nomeCompleto}</strong>:<br>`;
+            let encontrouNota = false;
+            for (const [disciplina, nota] of Object.entries(disciplinas)) {
+                // Verificar se a nota não é nula ou vazia
+                if (nota != null && nota !== "") {
+                    textoNotas += `- ${disciplina}: ${nota}<br>`;
+                    encontrouNota = true;
+                }
+            }
+            if (encontrouNota) {
+                resultadosEncontrados.push(textoNotas);
+            }
+        }
+    }
+
+    if (resultadosEncontrados.length > 0) {
+        resultado.innerHTML = resultadosEncontrados.join("<hr>");
+    } else {
+        resultado.textContent = `Nenhum aluno encontrado com "${nome}".`;
+    }
+}
+
+    </script>
+</body>
+</html>
