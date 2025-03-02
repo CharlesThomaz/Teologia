@@ -3,60 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Materiais de Aula - Curso de Formação Teológica</title>
+    <title>Formação Teológica - Cursos Online</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background: linear-gradient(90deg, #4e54c8, #8f94fb);
+        }
+        .jumbotron {
+            background: linear-gradient(90deg, #4e54c8, #8f94fb);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        .jumbotron h1 {
+            font-weight: bold;
+            font-size: 2.5rem;
+        }
+        .jumbotron p {
+            font-size: 1.25rem;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .btn-primary {
+            background-color: #4e54c8;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #8f94fb;
+        }
+        .contact-info {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .contact-info ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .contact-info ul li {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        .contact-info ul li i {
+            margin-right: 10px;
+            color: #4e54c8;
+        }
+        footer {
+            background: #343a40;
+            color: white;
+            padding: 40px 0;
+            margin-top: 50px;
+        }
+        footer a {
+            color: #8f94fb;
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: #4e54c8;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Teologia</a>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand" href="#">Formação Teológica</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
+                        <a class="nav-link" href="index.html">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cursos.html">Cursos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sobre.html">Sobre</a>
+                    </li>
+                    <li class="nav-item active">
                         <a class="nav-link" href="contato.html">Contato</a>
                     </li>
                 </ul>
             </div>
         </nav>
 
-        <section class="jumbotron text-center">
+        <section class="jumbotron">
             <div class="container">
-                <h1 class="display-4">Cursos de Teologia</h1>
-                <p class="lead">Clique no "NOME" da "ESCOLA" que você pertence</p>
+                <h1 class="display-4">Cursos de Teologia Online</h1>
+                <p class="lead">Aprenda teologia de forma prática e acessível, com professores especializados.</p>
+                <a href="#materiais" class="btn btn-primary btn-lg">Ver Cursos</a>
             </div>
         </section>
     </header>
 
     <main class="container mt-5">
+        <!-- Seção de Cursos -->
         <section id="materiais" class="mb-5">
-            <h2>IGREJA PAI FILHO E ESPÍRITO SANTO</h2>
-            <div class="card">
-                <div class="card-body">
-                    <img src="SiteTeologico/ippfes/logo.jpg" alt="Logo da IPPFES" class="card-img-top">
-                    <a href="SiteTeologico/ippfes/index.html" class="btn btn-primary">
-                        SITE DA IPPFES
-                    </a>
+            <h2 class="text-center mb-4">Nossos Cursos</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <img src="SiteTeologico/ippfes/logo.jpg" alt="Logo da IPPFES" class="card-img-top">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">IGREJA PAI FILHO E ESPÍRITO SANTO</h5>
+                            <p class="card-text">Aprofunde seus conhecimentos teológicos com nossos cursos exclusivos.</p>
+                            <a href="SiteTeologico/ippfes/index.html" class="btn btn-primary">
+                                Acessar Curso
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <img src="SiteTeologico/iej/logo.jpg" alt="Logo da IEJ" class="card-img-top">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">IGREJA EVANGÉLICA DE JESUS</h5>
+                            <p class="card-text">Explore os fundamentos da teologia com professores renomados.</p>
+                            <a href="SiteTeologico/iej/index.html" class="btn btn-primary">
+                                Acessar Curso
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <h2>IGREJA EVANGÉLICA DE JESUS</h2>
-            <div class="card">
-                <div class="card-body">
-                    <img src="SiteTeologico/iej/logo.jpg" alt="Logo da IEJ" class="card-img-top">
-                    <a href="SiteTeologico/iej/index.html" class="btn btn-primary btn-iej">
-                        SITE DA IEJ
-                    </a>
-                </div>
+        </section>
+
+        <!-- Seção de Contatos -->
+        <section id="contatos" class="mb-5">
+            <h2 class="text-center mb-4">Entre em Contato</h2>
+            <div class="contact-info">
+                <ul>
+                    <li>
+                        <i class="fab fa-linkedin"></i>
+                        <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/charles-thomaz-2b667225b/" target="_blank">Charles Thomaz</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <strong>Celular e WhatsApp:</strong> <a href="tel:+5531981216718">+55 31 98121-6718</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <strong>Email:</strong> <a href="mailto:charlesthomaz87@gmail.com">charlesthomaz87@gmail.com</a>
+                    </li>
+                </ul>
             </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 Formação Teológica. Todos os direitos reservados.</p>
+    <!-- Rodapé -->
+    <footer class="text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>Links Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="cursos.html">Cursos</a></li>
+                        <li><a href="sobre.html">Sobre</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Redes Sociais</h5>
+                    <a href="#" class="text-white mr-3"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-white mr-3"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-youtube"></i></a>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Contato</h5>
+                    <p>Email: contato@formacaoteologica.com</p>
+                    <p>Telefone: (31) 98121-6718</p>
+                </div>
+            </div>
+            <p class="mt-4">&copy; 2024 Formação Teológica. Todos os direitos reservados.</p>
+        </div>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
